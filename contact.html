@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Dylan Owusu Afriyie</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  .contact-hero { padding: 8rem 0 3rem; text-align: center; }
+  .contact-hero .heading { margin: 0 auto 1rem; }
+  .contact-hero .subtext { margin: 0 auto 2.5rem; text-align: center; }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 2rem;
+    max-width: 900px; margin: 0 auto;
+  }
+
+  /* Info side */
+  .contact-info-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .info-card {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1.4rem;
+  }
+  .info-card .info-icon {
+    width: 44px; height: 44px; min-width: 44px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 12px; font-size: 1.1rem;
+    background: var(--accent-dim); color: var(--accent);
+  }
+  .info-card h4 { font-size: 0.9rem; margin-bottom: 0.1rem; }
+  .info-card p { font-size: 0.85rem; color: var(--text-muted); }
+  .info-card a { color: var(--accent); text-decoration: none; transition: opacity 0.3s; }
+  .info-card a:hover { opacity: 0.8; }
+
+  .social-row { display: flex; gap: 0.8rem; margin-top: 0.5rem; }
+  .social-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-muted); font-size: 1.1rem;
+    transition: var(--transition);
+  }
+  .social-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* Form */
+  .contact-form-card { padding: 2rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block; font-size: 0.82rem; font-weight: 600;
+    color: var(--text-muted); margin-bottom: 0.4rem; letter-spacing: 0.3px;
+  }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 0.8rem 1rem;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); color: var(--text);
+    font-family: var(--font-body); font-size: 0.9rem;
+    transition: border-color 0.3s; outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  .form-note {
+    font-size: 0.78rem; color: var(--text-dim); margin-bottom: 1.2rem;
+    font-style: italic;
+  }
+
+  .submit-btn {
+    width: 100%; padding: 0.9rem; background: var(--accent); color: var(--bg);
+    border: none; border-radius: var(--radius-sm);
+    font-family: var(--font-body); font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; transition: var(--transition);
+  }
+  .submit-btn:hover { box-shadow: 0 0 25px var(--accent-glow); transform: translateY(-1px); }
+
+  /* CV Download */
+  .cv-section {
+    text-align: center; margin-top: 3rem; padding: 3rem;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); max-width: 900px; margin-left: auto; margin-right: auto;
+  }
+  .cv-section h3 { font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .cv-section h3 em { font-style: italic; color: var(--accent); }
+  .cv-section p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.5rem; }
+
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="siteNav">
+  <a href="index.html" class="nav-brand">Dylan <em>Afriyie</em></a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="designs.html">Designs</a>
+    <a href="contact.html" class="active nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section class="contact-hero">
+  <div class="container">
+    <span class="label reveal">// connect</span>
+    <h2 class="heading reveal">Let's work <em>together</em></h2>
+    <p class="subtext reveal">Whether you have a cybersecurity challenge, a consulting opportunity, or just want to connect — I'd like to hear from you.</p>
+  </div>
+</section>
+
+<section class="section-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Left: Info Cards -->
+      <div class="contact-info-cards">
+        <div class="card info-card reveal">
+          <div class="info-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:gabrieldylan0109@gmail.com">gabrieldylan0109@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="card info-card reveal">
+          <div class="info-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <h4>Phone</h4>
+            <p>+233 20 820 3691 / +233 54 468 1539</p>
+          </div>
+        </div>
+        <div class="card info-card reveal">
+          <div class="info-icon"><i class="fas fa-location-dot"></i></div>
+          <div>
+            <h4>Location</h4>
+            <p>Greater Accra Region, Ghana</p>
+          </div>
+        </div>
+        <div class="card info-card reveal">
+          <div class="info-icon"><i class="fas fa-building"></i></div>
+          <div>
+            <h4>Current Role</h4>
+            <p>Cyber Intelligence Analyst — CID Cybercrime Unit</p>
+          </div>
+        </div>
+
+        <div class="social-row reveal">
+          <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/gabe-dylan0109" target="_blank" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="mailto:gabrieldylan0109@gmail.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="card contact-form-card reveal">
+        <form action="mailto:gabrieldylan0109@gmail.com" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Cybersecurity Consultation">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Tell me about your project or opportunity..."></textarea>
+          </div>
+          <p class="form-note"><i class="fas fa-info-circle"></i> This opens your email client. For a direct form, integrate with Formspree or EmailJS.</p>
+          <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- CV Download -->
+    <div class="cv-section reveal">
+      <h3>Download my <em>CV</em></h3>
+      <p>Get the full breakdown of my experience, certifications, and security labs in one document.</p>
+      <a href="Dylan_Owusu_Afriyie_CV.pdf" download class="btn btn-primary"><i class="fas fa-file-pdf"></i> Download CV (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <a href="https://github.com/gabe-dylan0109" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    <a href="mailto:gabrieldylan0109@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+  </div>
+  <p>&copy; 2026 Dylan Owusu Afriyie.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('siteNav').classList.toggle('scrolled',window.scrollY>50));
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

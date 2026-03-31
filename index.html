@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dylan Owusu Afriyie | Cyber Intelligence Analyst</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* ═══ HERO ═══ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .hero-text {
+      flex: 1.4;
+    }
+
+    .hero-visual {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: 50px;
+      padding: 0.35rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge .pulse {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .typing-row {
+      font-family: var(--font-mono);
+      font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      min-height: 1.8rem;
+    }
+
+    .typing-row .cursor {
+      color: var(--accent);
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .hero p {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    /* Photo */
+    .photo-frame {
+      position: relative;
+      width: 320px;
+      height: 380px;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 20px;
+      border: 2px solid var(--border);
+      position: relative;
+      z-index: 2;
+    }
+
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      border: 2px solid var(--accent);
+      opacity: 0.25;
+      z-index: 1;
+    }
+
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      bottom: -25px;
+      right: -25px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--accent);
+      filter: blur(50px);
+      opacity: 0.2;
+    }
+
+    /* Stats */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat .stat-num {
+      font-family: var(--font-mono);
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .stat .stat-num span {
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .stat .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    /* ═══ CERT WALL ═══ */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .cert-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+
+    .cert-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    .cert-card .cert-info {
+      padding: 0.8rem 1rem;
+    }
+
+    .cert-card .cert-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .cert-card .cert-issuer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .cert-card .cert-badge {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* ═══ LEARNING ═══ */
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .learn-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .learn-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .learn-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .learn-icon.blue {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .learn-icon.green {
+      background: rgba(52, 211, 153, 0.08);
+      color: var(--green);
+    }
+
+    .learn-icon.amber {
+      background: rgba(251, 191, 36, 0.08);
+      color: var(--amber);
+    }
+
+    .learn-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .learn-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .learn-progress {
+      margin-top: 0.8rem;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .learn-progress .bar {
+      height: 100%;
+      border-radius: 2px;
+      background: var(--accent);
+    }
+
+    /* ═══ AMBIENT ═══ */
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-1 {
+      width: 450px;
+      height: 450px;
+      background: var(--accent);
+      top: -100px;
+      right: -50px;
+      opacity: 0.06;
+    }
+
+    .glow-2 {
+      width: 350px;
+      height: 350px;
+      background: #6366F1;
+      bottom: 15%;
+      left: -80px;
+      opacity: 0.04;
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 900px) {
+      .hero-inner {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .photo-frame {
+        width: 220px;
+        height: 260px;
+      }
+
+      .hero p {
+        margin: 0 auto 2rem;
+      }
+
+      .hero-btns {
+        justify-content: center;
+      }
+
+      .hero-stats {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+    }
+
+
+    /* Modal for cert preview */
+    .cert-modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(7, 11, 20, 0.9);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .cert-modal-bg.active {
+      display: flex;
+    }
+
+    .cert-modal-bg img {
+      max-width: 700px;
+      width: 90%;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .cert-modal-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <!-- NAV -->
+  <nav class="site-nav" id="siteNav">
+    <a href="index.html" class="nav-brand">Dylan <em>Afriyie</em></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><i
+        class="fas fa-bars"></i></button>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="designs.html">Designs</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="heroSection">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="status-badge"><span class="pulse"></span> CID Cybercrime Unit — Active Attachment</div>
+          <h1>Cyber Intelligence<br>&amp; <em>Digital Forensics</em></h1>
+          <div class="typing-row"><span id="typeTarget"></span><span class="cursor">|</span></div>
+          <p>MSc candidate in Digital Forensics & Cybersecurity with hands-on experience authoring intelligence reports
+            for active law enforcement investigations, conducting financial tracing, and evaluating forensic tool
+            suites.</p>
+          <div class="hero-btns">
+            <a href="projects.html" class="btn btn-primary"><i class="fas fa-shield-halved"></i> View Security Labs</a>
+            <a href="Dylan_Owusu_Afriyie_CV.pdf" class="btn btn-ghost" download><i class="fas fa-download"></i> Download
+              CV</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-num">5<span>+</span></div>
+              <div class="stat-label">Certifications</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">88<span>%</span></div>
+              <div class="stat-label">Pen Testing Grade</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">10<span>+</span></div>
+              <div class="stat-label">Years in IT</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="photo-frame"><img src="images/pfp.png" alt="Dylan Owusu Afriyie"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="section-pad" id="certSection">
+    <div class="container">
+      <div class="reveal">
+        <span class="label">// credentials</span>
+        <h2 class="heading">Certification <em>Vault</em></h2>
+        <p class="subtext">Verified credentials in cybersecurity, penetration testing, and digital forensics. Click any
+          badge to view the full certificate.</p>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card reveal" onclick="openCert('images/cert_pentest.png')">
+          <img src="images/cert_pentest.png" alt="Pen Testing 2025">
+          <div class="cert-info">
+            <div class="cert-name">Penetration Testing 2025</div>
+            <div class="cert-issuer">IT Masters / Charles Sturt University</div>
+            <span class="cert-badge">88% Distinction</span>
+          </div>
+        </div>
+        <div class="cert-card reveal" onclick="openCert('images/cert_isc2.png')">
+          <img src="images/cert_isc2.png" alt="ISC2 CC">
+          <div class="cert-info">
+            <div class="cert-name">Certified in Cybersecurity (CC)</div>
+            <div class="cert-issuer">ISC2</div>
+          </div>
+        </div>
+        <div class="cert-card reveal" onclick="openCert('images/cert_osint.png')">
+          <img src="images/cert_osint.png" alt="OSINT">
+          <div class="cert-info">
+            <div class="cert-name">Introduction to OSINT</div>
+            <div class="cert-issuer">Security Blue Team</div>
+          </div>
+        </div>
+        <div class="cert-card reveal" onclick="openCert('images/cert_network.png')">
+          <img src="images/cert_network.png" alt="Network Analysis">
+          <div class="cert-info">
+            <div class="cert-name">Network Analysis</div>
+            <div class="cert-issuer">Security Blue Team</div>
+          </div>
+        </div>
+        <div class="cert-card reveal" onclick="openCert('images/cert_ncc.png')">
+          <img src="images/cert_ncc.png" alt="NCC Cybersecurity">
+          <div class="cert-info">
+            <div class="cert-name">Cybersecurity Short Course</div>
+            <div class="cert-issuer">NCC Education</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENTLY LEARNING -->
+  <section class="section-pad" id="learningSection" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal">
+        <span class="label">// growth</span>
+        <h2 class="heading">Currently <em>Learning</em></h2>
+      </div>
+      <div class="learning-grid">
+        <div class="learn-card reveal">
+          <div class="learn-icon blue"><i class="fas fa-user-graduate"></i></div>
+          <h4>MSc Digital Forensics & Cybersecurity</h4>
+          <p>GIMPA — IT Auditing, Mobile Forensics, Ethical Hacking, Cyber Crime & Risk Management.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:95%;"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon green"><i class="fas fa-bug"></i></div>
+          <h4>Advanced Penetration Testing</h4>
+          <p>Deepening exploitation techniques, Active Directory attacks, and post-exploitation frameworks.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:55%; background:var(--green);"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon amber"><i class="fas fa-robot"></i></div>
+          <h4>AI-Driven Cyber Analytics</h4>
+          <p>Exploring machine learning applications in threat detection, anomaly analysis, and automated response.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:20%; background:var(--amber);"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon" style="background: rgba(239, 68, 68, 0.08); color: #ef4444;"><i
+              class="fas fa-shield-halved"></i></div>
+          <h4>CompTIA Security+</h4>
+          <p>Mastering fundamental security concepts, network defense, threat mitigation, and compliance frameworks.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:15%; background: #ef4444;"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon" style="background: rgba(139, 92, 246, 0.08); color: #8b5cf6;"><i
+              class="fab fa-python"></i></div>
+          <h4>Automate the Boring Stuff with Python</h4>
+          <p>Learning practical Python programming for task automation, data parsing, and developing custom security
+            scripts.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:10%; background: #8b5cf6;"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon" style="background: rgba(6, 182, 212, 0.08); color: #06b6d4;"><i
+              class="fas fa-brain"></i></div>
+          <h4>AI Fluency: Framework & Foundations</h4>
+          <p>Collaborating with AI systems effectively, ethically, and safely to enhance analytical capabilities and
+            workflows.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:5%; background: #06b6d4;"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon" style="background: rgba(249, 115, 22, 0.08); color: #f97316;"><i
+              class="fas fa-network-wired"></i></div>
+          <h4>Intro to Model Context Protocol</h4>
+          <p>Building modular AI applications and securely connecting language models to external tools and data
+            sources.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:5%; background: #f97316;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CERT MODAL -->
+  <div class="cert-modal-bg" id="certModal">
+    <button class="cert-modal-close" onclick="closeCert()">&times;</button>
+    <img id="certModalImg" src="" alt="Certificate">
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank"><i class="fab fa-linkedin"></i>
+        LinkedIn</a>
+      <a href="https://github.com/gabe-dylan0109" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      <a href="mailto:gabrieldylan0109@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+    </div>
+    <p>&copy; 2026 Dylan Owusu Afriyie</p>
+  </footer>
+
+  <script>
+    // Typing
+    const roles = ["Cyber Intelligence Analyst", "Penetration Tester", "ISC2 CC Certified", "MSc Cyber Security & Digital Forensics Candidate", "OSINT Researcher"];
+    let ri = 0, ci = 0, del = false;
+    const t = document.getElementById('typeTarget');
+    function type() {
+      const w = roles[ri];
+      if (!del) { t.textContent = w.substring(0, ci++); if (ci > w.length) { del = true; setTimeout(type, 2000); return; } setTimeout(type, 65); }
+      else { t.textContent = w.substring(0, ci--); if (ci < 0) { del = false; ri = (ri + 1) % roles.length; setTimeout(type, 400); return; } setTimeout(type, 35); }
+    }
+    type();
+
+    // Nav scroll
+    window.addEventListener('scroll', () => document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 50));
+
+    // Reveal
+    const obs = new IntersectionObserver(entries => { entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 60); obs.unobserve(e.target); } }); }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Cert modal
+    function openCert(src) { document.getElementById('certModalImg').src = src; document.getElementById('certModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeCert() { document.getElementById('certModal').classList.remove('active'); document.body.style.overflow = 'auto'; }
+    document.getElementById('certModal').addEventListener('click', function (e) { if (e.target === this) closeCert(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCert(); });
+  </script>
+</body>
+
+</html>

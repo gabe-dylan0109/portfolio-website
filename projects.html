@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects | Dylan Owusu Afriyie</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+<style>
+  .projects-hero { padding: 8rem 0 3rem; }
+
+  .project-showcase { margin-bottom: 4rem; }
+  .project-showcase .project-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .project-showcase .project-type {
+    font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+    padding: 0.3rem 0.8rem; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .type-pentest { background: rgba(248,113,113,0.1); color: var(--red); }
+  .type-devsec { background: var(--accent-dim); color: var(--accent); }
+
+  .project-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+
+  .project-info h3 { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .project-info h3 em { font-style: italic; color: var(--accent); }
+  .project-info p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.2rem; }
+  .project-info .tech-used { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .project-info .tech-used span {
+    padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 4px;
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim);
+  }
+  .findings { margin-top: 1rem; }
+  .findings h4 { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .findings ul { list-style: none; padding: 0; }
+  .findings li {
+    font-size: 0.88rem; color: var(--text-muted); padding-left: 1.2rem;
+    position: relative; margin-bottom: 0.4rem; line-height: 1.5;
+  }
+  .findings li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; }
+  .findings.vuln li::before { background: var(--red); }
+  .findings.fix li::before { background: var(--green); }
+
+  /* Gallery */
+  .project-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .gallery-img {
+    border-radius: var(--radius-sm); overflow: hidden; cursor: pointer;
+    border: 1px solid var(--border); transition: var(--transition);
+  }
+  .gallery-img:hover { border-color: var(--border-hover); transform: scale(1.02); }
+  .gallery-img:first-child { grid-column: span 2; }
+  .gallery-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .project-divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+  /* Modal */
+  .img-modal {
+    display: none; position: fixed; inset: 0; z-index: 5000;
+    background: rgba(7,11,20,0.92); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .img-modal.active { display: flex; }
+  .img-modal img { max-width: 900px; width: 95%; border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .img-modal-close {
+    position: fixed; top: 1.5rem; right: 1.5rem;
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    width: 40px; height: 40px; border-radius: 10px; font-size: 1.3rem; cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .project-layout { grid-template-columns: 1fr; }
+    .project-gallery { order: -1; }
+  }
+
+
+</style>
+</head>
+<body>
+
+
+
+<nav class="site-nav" id="siteNav">
+  <a href="index.html" class="nav-brand">Dylan <em>Afriyie</em></a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="designs.html">Designs</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section class="projects-hero">
+  <div class="container">
+    <span class="label reveal">// security labs</span>
+    <h2 class="heading reveal">Application Security &amp;<br><em>Penetration Testing</em> Labs</h2>
+    <p class="subtext reveal">Projects built specifically to practise vulnerability discovery, exploitation, and remediation in controlled environments. Each lab documents real findings with reproducible proof-of-concept steps.</p>
+  </div>
+</section>
+
+<!-- PROJECT 1: AFRIYIE BANK -->
+<section class="section-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="project-showcase reveal">
+      <div class="project-header">
+        <span class="project-type type-pentest"><i class="fas fa-bug"></i> Penetration Testing</span>
+      </div>
+      <div class="project-layout">
+        <div class="project-info">
+          <h3>Afriyie Bank — Vulnerable <em>Web Application</em> Lab</h3>
+          <p>A deliberately vulnerable banking web application prototyped as a penetration testing target. Simulates real-world financial application attack surfaces including authentication flows, session management, transaction handling, and input validation weaknesses.</p>
+          <div class="tech-used">
+            <span>Python</span><span>Flask</span><span>SQL</span><span>HTML/CSS/JS</span><span>Burp Suite</span>
+          </div>
+          <div class="findings vuln">
+            <h4><i class="fas fa-triangle-exclamation"></i> Vulnerabilities Discovered</h4>
+            <ul>
+              <li>Reflected XSS in transaction history search field</li>
+              <li>Missing CSRF protection on fund transfer forms</li>
+              <li>Hardcoded cryptographic secrets enabling session hijacking</li>
+              <li>Misconfigured server environment exposing interactive debugger</li>
+            </ul>
+          </div>
+          <div class="project-divider"></div>
+          <div class="findings fix">
+            <h4><i class="fas fa-shield-halved"></i> Remediation Applied</h4>
+            <ul>
+              <li>Input sanitisation and output encoding for XSS prevention</li>
+              <li>Implementation of anti-CSRF tokens on all state-changing forms</li>
+              <li>Migration of hardcoded secrets to secure environment variables</li>
+              <li>Disabling of interactive debuggers for production environments</li>
+              <li>All findings documented with CVSS scoring and OWASP Top 10 mapping</li>
+            </ul>
+          </div>
+        </div>
+        <div class="project-gallery">
+          <div class="gallery-img" onclick="openImg('images/bank2.png')"><img src="images/bank2.png" alt="Afriyie Bank Dashboard"></div>
+          <div class="gallery-img" onclick="openImg('images/bank1.png')"><img src="images/bank1.png" alt="Afriyie Bank Login"></div>
+          <div class="gallery-img" onclick="openImg('images/bank3.png')"><img src="images/bank3.png" alt="XSS Test"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT 2: IMAGE TO PDF -->
+<section class="section-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="project-showcase reveal">
+      <div class="project-header">
+        <span class="project-type type-devsec"><i class="fas fa-code"></i> DevSecOps</span>
+      </div>
+      <div class="project-layout">
+        <div class="project-info">
+          <h3>Image-to-PDF Converter — <em>Secure App</em> Prototyping Lab</h3>
+          <p>A cross-platform image-to-PDF application built with Flutter/Dart and a Python prototype. The project served as a controlled lab for practising full-cycle application security auditing: build, test, break, fix, document.</p>
+          <div class="tech-used">
+            <span>Flutter/Dart</span><span>Python</span><span>ADB</span><span>APK Decompilation</span><span>CSP</span>
+          </div>
+          <div class="findings vuln">
+            <h4><i class="fas fa-triangle-exclamation"></i> Security Audit Findings</h4>
+            <ul>
+              <li>Temporary file disclosure — sensitive PDFs accessible via ADB</li>
+              <li>Client-side DoS vulnerability via unbounded file input</li>
+              <li>Missing Content Security Policy headers on web build</li>
+              <li>HTTPS certificate validation gaps in network requests</li>
+            </ul>
+          </div>
+          <div class="project-divider"></div>
+          <div class="findings fix">
+            <h4><i class="fas fa-shield-halved"></i> Mitigations Implemented</h4>
+            <ul>
+              <li>Secure temp-file handling with immediate cleanup after export</li>
+              <li>Input size limits and streaming processing for memory safety</li>
+              <li>CSP and HTTP security header hardening on web deployment</li>
+              <li>Reproducible lab steps documented for stakeholder review</li>
+            </ul>
+          </div>
+        </div>
+        <div class="project-gallery">
+          <div class="gallery-img" onclick="openImg('images/pdf1.png')"><img src="images/pdf1.png" alt="PDF Converter Empty"></div>
+          <div class="gallery-img" onclick="openImg('images/pdf2.png')"><img src="images/pdf2.png" alt="PDF Converter Loaded"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE MODAL -->
+<div class="img-modal" id="imgModal">
+  <button class="img-modal-close" onclick="closeImg()">&times;</button>
+  <img id="imgModalSrc" src="" alt="Screenshot">
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <a href="https://github.com/gabe-dylan0109" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    <a href="mailto:gabrieldylan0109@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+  </div>
+  <p>&copy; 2026 Dylan Owusu Afriyie.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('siteNav').classList.toggle('scrolled',window.scrollY>50));
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+function openImg(src){document.getElementById('imgModalSrc').src=src;document.getElementById('imgModal').classList.add('active');document.body.style.overflow='hidden';}
+function closeImg(){document.getElementById('imgModal').classList.remove('active');document.body.style.overflow='auto';}
+document.getElementById('imgModal').addEventListener('click',function(e){if(e.target===this)closeImg();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeImg();});
+
+
+</script>
+</body>
+</html>

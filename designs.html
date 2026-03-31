@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Designs | Dylan Owusu Afriyie</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Instrument Serif for loading screen -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════════════════════════
+       LOADING SCREEN
+       ═══════════════════════════════════════════════════════════════════════════ */
+
+    /* ── Overlay container ── */
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--bg, #070B14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+      opacity: 1;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .loading-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+
+
+    /* ── Rotating words — center ── */
+    .loader-words {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .loader-word {
+      position: absolute;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      color: rgba(245, 245, 245, 0.80);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .loader-word.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .loader-word.exit {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    /* ── Counter — bottom-right (subtle) ── */
+    .loader-counter {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.8rem;
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--text-muted, #7A8BA0);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: loaderFadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+    }
+
+    /* ── Progress bar — bottom edge ── */
+    .loader-bar-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(31, 31, 31, 0.5);
+    }
+
+    .loader-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%);
+      box-shadow: 0 0 8px rgba(137, 170, 204, 0.35);
+      transform-origin: left;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Keyframes ── */
+    @keyframes loaderFadeDown {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes loaderFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Page content wrapper — hidden until loader done ── */
+    .page-content {
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .page-content.visible {
+      opacity: 1;
+    }
+
+    /* ── Medium screens ── */
+    @media (min-width: 768px) {
+      .loader-counter {
+        bottom: 2rem;
+        right: 2rem;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════════
+       DESIGNS PAGE STYLES (existing)
+       ═══════════════════════════════════════════════════════════════════════════ */
+
+    .designs-hero {
+      padding: 8rem 0 3rem;
+    }
+
+    .design-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .design-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .design-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: var(--transition);
+      z-index: 2;
+    }
+
+    .design-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+
+    .design-card:hover::before {
+      opacity: 1;
+    }
+
+    /* ═══ SKELETON LOADING ═══ */
+    .img-wrapper {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: var(--bg-raised);
+      overflow: hidden;
+    }
+
+    .img-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
+      animation: shimmer 1.5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .img-wrapper.loaded::after {
+      display: none;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .design-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: var(--bg-raised);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .design-card img.visible {
+      opacity: 1;
+    }
+
+    .design-caption {
+      padding: 0.8rem 1rem;
+    }
+
+    .design-caption .design-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .design-caption .design-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Modal */
+    .img-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(7, 11, 20, 0.92);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .img-modal.active {
+      display: flex;
+    }
+
+    .img-modal img {
+      max-width: 900px;
+      width: 95%;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .img-modal-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 5001;
+    }
+
+    @media (max-width: 900px) {
+      .design-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .design-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       LOADING SCREEN OVERLAY
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <div class="loading-screen" id="loadingScreen">
+    <!-- Rotating words — center -->
+    <div class="loader-words">
+      <span class="loader-word active" data-index="0">Design</span>
+      <span class="loader-word" data-index="1">Create</span>
+      <span class="loader-word" data-index="2">Inspire</span>
+    </div>
+
+    <!-- Counter — bottom-right -->
+    <div class="loader-counter" id="loaderCounter">000</div>
+
+    <!-- Progress bar — bottom edge -->
+    <div class="loader-bar-track">
+      <div class="loader-bar-fill" id="loaderBarFill"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       PAGE CONTENT (hidden until loader finishes)
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <div class="page-content" id="pageContent">
+
+    <nav class="site-nav" id="siteNav">
+      <a href="index.html" class="nav-brand">Dylan <em>Afriyie</em></a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><i
+          class="fas fa-bars"></i></button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="designs.html" class="active">Designs</a>
+        <a href="contact.html" class="nav-cta">Contact</a>
+      </div>
+    </nav>
+
+    <section class="designs-hero">
+      <div class="container">
+        <span class="label reveal">// design work</span>
+        <h2 class="heading reveal">Graphic Design <em>Portfolio</em></h2>
+        <p class="subtext reveal">Professional design work spanning corporate branding, legal documentation, packaging,
+          and visual communications — built over a decade of client-facing work for government and private-sector
+          organisations.</p>
+      </div>
+    </section>
+
+    <section class="section-pad" style="padding-top:0;">
+      <div class="container">
+        <div class="design-grid">
+
+          <div class="design-card reveal" onclick="openImg('images/design_1.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_1.jpg"
+                alt="Corporate Brand Identity" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Corporate Brand Identity</div>
+              <div class="design-subtitle">Client: De-Bamfo Quality Enterprise</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_2.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_2.jpg"
+                alt="Business Flyer Design" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Business Flyer Design</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_3.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_3.jpg"
+                alt="Corporate Brand Identity" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Corporate Brand Identity</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_4.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_4.jpg"
+                alt="Corporate Brand Identity" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Corporate Brand Identity</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_5.png')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_5.png"
+                alt="Visual Communications" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Visual Communications</div>
+              <div class="design-subtitle">Corporate</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_6.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_6.jpg" alt="Logo Design"
+                onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Logo Design</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_7.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_7.jpg" alt="Logo Design"
+                onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Logo Design</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_8.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_8.jpg"
+                alt="Business Flyer Design" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Business Flyer Design</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_9.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_9.jpg"
+                alt="Business Banner Design" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Business Banner Design</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_10.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_10.jpg"
+                alt="Visual Communications" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Visual Communications</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_11.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_11.jpg"
+                alt="Visual Communications" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Visual Communications</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_12.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_12.jpg"
+                alt="Visual Communications" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Visual Communications</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_13.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_13.jpg"
+                alt="Visual Communications" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Visual Communications</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_14.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_14.jpg"
+                alt="Visual Communications" onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Visual Communications</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+          <div class="design-card reveal" onclick="openImg('images/design_15.jpg')">
+            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_15.jpg" alt="Logo Design"
+                onload="imgLoaded(this)"></div>
+            <div class="design-caption">
+              <div class="design-title">Logo Design</div>
+              <div class="design-subtitle">Professional</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- IMAGE MODAL -->
+    <div class="img-modal" id="imgModal">
+      <button class="img-modal-close" onclick="closeImg()">&times;</button>
+      <img id="imgModalSrc" src="" alt="Design">
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank"><i class="fab fa-linkedin"></i>
+          LinkedIn</a>
+        <a href="https://github.com/gabe-dylan0109" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="mailto:gabrieldylan0109@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+      </div>
+      <p>&copy; 2026 Dylan Owusu Afriyie.</p>
+    </footer>
+
+  </div><!-- /page-content -->
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════════════════
+    // LOADING SCREEN LOGIC
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    (function () {
+      var COUNTER_DURATION = 2700;  // ms — counter runs 0 → 100
+      var WORD_INTERVAL    = 900;   // ms — switch word every 900ms
+      var COMPLETE_DELAY   = 400;   // ms — pause after 100 before fade-out
+      var WORDS_COUNT      = 3;
+
+      var counterEl = document.getElementById('loaderCounter');
+      var barFill   = document.getElementById('loaderBarFill');
+      var screen    = document.getElementById('loadingScreen');
+      var content   = document.getElementById('pageContent');
+
+      var words        = document.querySelectorAll('.loader-word');
+      var currentWord  = 0;
+      var startTime    = null;
+      var completed    = false;
+
+      // ── Counter via requestAnimationFrame ─────────────────────────────────
+      function tick(timestamp) {
+        if (startTime === null) startTime = timestamp;
+        var elapsed = timestamp - startTime;
+        var raw     = Math.min((elapsed / COUNTER_DURATION) * 100, 100);
+        var rounded = Math.round(raw);
+
+        // Update counter text (zero-padded to 3 digits)
+        counterEl.textContent = String(rounded).padStart(3, '0');
+
+        // Update progress bar width
+        barFill.style.width = raw + '%';
+
+        if (raw < 100) {
+          requestAnimationFrame(tick);
+        } else if (!completed) {
+          completed = true;
+          setTimeout(finishLoading, COMPLETE_DELAY);
+        }
+      }
+
+      requestAnimationFrame(tick);
+
+      // ── Word cycler ───────────────────────────────────────────────────────
+      var wordTimer = setInterval(function () {
+        if (currentWord >= WORDS_COUNT - 1) {
+          clearInterval(wordTimer);
+          return;
+        }
+
+        // Exit current word
+        words[currentWord].classList.remove('active');
+        words[currentWord].classList.add('exit');
+
+        // Advance
+        currentWord++;
+
+        // Small delay so exit animation plays before enter
+        setTimeout(function () {
+          words[currentWord].classList.add('active');
+        }, 50);
+      }, WORD_INTERVAL);
+
+      // ── Finish: fade out loader, fade in page ─────────────────────────────
+      function finishLoading() {
+        screen.classList.add('fade-out');
+
+        // After fade-out transition ends (~600ms), remove loader & show page
+        setTimeout(function () {
+          screen.style.display = 'none';
+          content.classList.add('visible');
+        }, 620);
+      }
+    })();
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // ORIGINAL DESIGNS PAGE SCRIPTS
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    // Nav scroll
+    window.addEventListener('scroll', function () {
+      document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll reveal
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e, i) {
+        if (e.isIntersecting) {
+          setTimeout(function () { e.target.classList.add('visible'); }, i * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+
+    // ═══ IMAGE LOADED — fade in and kill skeleton ═══
+    function imgLoaded(img) {
+      img.classList.add('visible');
+      var wrapper = img.closest('.img-wrapper');
+      if (wrapper) wrapper.classList.add('loaded');
+    }
+
+    // Handle images already cached by browser before JS runs
+    document.querySelectorAll('.design-card img').forEach(function (img) {
+      if (img.complete && img.naturalWidth > 0) {
+        imgLoaded(img);
+      }
+    });
+
+    // ═══ MODAL ═══
+    function openImg(src) {
+      document.getElementById('imgModalSrc').src = src;
+      document.getElementById('imgModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImg() {
+      document.getElementById('imgModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+      document.getElementById('imgModalSrc').src = '';
+    }
+
+    document.getElementById('imgModal').addEventListener('click', function (e) {
+      if (e.target === this) closeImg();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeImg();
+    });
+  </script>
+</body>
+
+</html>

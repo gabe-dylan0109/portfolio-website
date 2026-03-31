@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Dylan Owusu Afriyie</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .about-hero {
+      padding: 8rem 0 3rem;
+    }
+
+    .about-hero .heading {
+      max-width: 700px;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 180px 36px 1fr;
+      align-items: start;
+      padding: 1.2rem 0;
+    }
+
+    .tl-date {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      text-align: right;
+      padding-top: 5px;
+    }
+
+    .tl-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+
+    .tl-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .tl-dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .tl-connector {
+      width: 1px;
+      flex: 1;
+      background: var(--border);
+      min-height: 20px;
+    }
+
+    .tl-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem 1.4rem;
+      transition: var(--transition);
+    }
+
+    .tl-content:hover {
+      border-color: var(--border-hover);
+    }
+
+    .tl-content h4 {
+      font-size: 1rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .tl-content .company {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .tl-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tl-content li {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding-left: 1rem;
+      position: relative;
+      margin-bottom: 0.3rem;
+      line-height: 1.55;
+    }
+
+    .tl-content li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* Edu */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .edu-card {
+      padding: 1.5rem;
+    }
+
+    .edu-card .school {
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-card .date {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .edu-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+
+    /* Tools */
+    .tools-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .tool-group {
+      padding: 1.5rem;
+    }
+
+    .tool-group-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+    }
+
+    .tool-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tool-tag {
+      padding: 0.35rem 0.7rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .tool-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .tl-item {
+        grid-template-columns: 1fr;
+      }
+
+      .tl-date {
+        text-align: left;
+        margin-bottom: 0.3rem;
+      }
+
+      .tl-line {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="site-nav" id="siteNav">
+    <a href="index.html" class="nav-brand">Dylan <em>Afriyie</em></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><i
+        class="fas fa-bars"></i></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="designs.html">Designs</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+    </div>
+  </nav>
+
+  <section class="about-hero">
+    <div class="container">
+      <span class="label reveal">// about me</span>
+      <h2 class="heading reveal">From graphic design to <em>cyber intelligence</em> — a decade of solving problems.</h2>
+      <p class="subtext reveal">Master's candidate in Digital Forensics & Cybersecurity. Currently attached to the Ghana
+        Police Service Cybercrime Unit, contributing to active transnational fraud investigations through intelligence
+        reporting, financial tracing, and forensic tool evaluation.</p>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section-pad" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal"><span class="label">// experience</span>
+        <h2 class="heading">Professional <em>Timeline</em></h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-date">Nov 2025 — Present</div>
+          <div class="tl-line">
+            <div class="tl-dot active"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-content">
+            <h4>Cyber Intelligence Analyst — Industrial Attachment</h4>
+            <div class="company">Ghana Police Service, CID Headquarters | Cybercrime Unit</div>
+            <ul>
+              <li>Authored master cyber intelligence reports for active transnational fraud investigations with
+                threat-actor network analysis and actionable targeting directives.</li>
+              <li>Conducted financial tracing by mapping mobile money payment flows, identifying fund consolidation
+                patterns, and structuring court-order evidence.</li>
+              <li>Evaluated mobile forensic suites (Cellebrite, Oxygen, MSAB XRY, GrayKey) and IMEI carrier lookup
+                platforms for unit procurement.</li>
+              <li>Analysed Call Data Records (CDRs) and OSINT to map suspect networks and support INTERPOL escalation
+                requests.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">Sep 2022 — Nov 2023</div>
+          <div class="tl-line">
+            <div class="tl-dot"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-content">
+            <h4>Human Resource Co-ordinator</h4>
+            <div class="company">Margins Group | Accra Central</div>
+            <ul>
+              <li>Automated HR processes through fillable PDF forms and Excel-based tracking systems (VBA/Power Query).
+              </li>
+              <li>Maintained data security protocols for sensitive employee PII and digital access controls.</li>
+              <li>Streamlined recruitment pipelines and onboarding procedures with HR Business Partners.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">Jun 2015 — Sep 2022</div>
+          <div class="tl-line">
+            <div class="tl-dot"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-content">
+            <h4>Graphic Designer</h4>
+            <div class="company">Digital Point | Tesano, Accra</div>
+            <ul>
+              <li>Managed secure document processing for law enforcement agencies with strict confidentiality
+                compliance.</li>
+              <li>Designed legal agreements, reports, and corporate branded materials using Adobe Illustrator and
+                Photoshop.</li>
+              <li>Orchestrated office operations including file digitisation and systematic archiving protocols.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">Jun — Sep 2018</div>
+          <div class="tl-line">
+            <div class="tl-dot"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-content">
+            <h4>Graphic Design Assistant (Intern)</h4>
+            <div class="company">FON Packaging Ventures | Spintex, Accra</div>
+            <ul>
+              <li>Created precision-engineered packaging designs, translating client specs into print-ready production
+                files.</li>
+              <li>Collaborated with production on embossed design plates and colour accuracy across print runs.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section-pad" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal"><span class="label">// education</span>
+        <h2 class="heading">Academic <em>Foundation</em></h2>
+      </div>
+      <div class="edu-grid">
+        <div class="card edu-card reveal">
+          <div class="school">GIMPA</div>
+          <h4>MSc. Digital Forensics & Cybersecurity</h4>
+          <div class="date">Feb 2025 — Present</div>
+          <p>IT Auditing, Mobile Forensics, Ethical Hacking, Cyber Crime & Risk Management. Capstone: Android Data
+            Acquisition & Analysis.</p>
+        </div>
+        <div class="card edu-card reveal">
+          <div class="school">NCC Education</div>
+          <h4>Cybersecurity Short Course</h4>
+          <div class="date">Nov — Dec 2024</div>
+          <p>Physical security, encryption, disaster recovery, network security via hands-on virtual labs.</p>
+        </div>
+        <div class="card edu-card reveal">
+          <div class="school">GIMPA</div>
+          <h4>BSc. Management & Information Systems</h4>
+          <div class="date">Sep 2018 — Sep 2022</div>
+          <p>Information Security, HCI, Business Intelligence. Research: "Impact of AIS on Company Profitability."</p>
+        </div>
+        <div class="card edu-card reveal">
+          <div class="school">St. Peter's SHS</div>
+          <h4>WASSCE — Science</h4>
+          <div class="date">Sep 2015 — Aug 2018</div>
+          <p>Elective Maths, Physics, Chemistry, Geography. Most Disciplined Student. Best in Geography.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="section-pad" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal"><span class="label">// arsenal</span>
+        <h2 class="heading">Tools &amp; <em>Technologies</em></h2>
+      </div>
+      <div class="tools-section">
+        <div class="card tool-group reveal">
+          <div class="tool-group-label"><i class="fas fa-shield-halved"></i> Security & Forensics</div>
+          <div class="tool-tags">
+            <span class="tool-tag">Kali Linux</span><span class="tool-tag">Metasploit</span><span class="tool-tag">Burp
+              Suite</span>
+            <span class="tool-tag">Wireshark</span><span class="tool-tag">Nmap</span><span class="tool-tag">Magnet
+              AXIOM</span>
+            <span class="tool-tag">Autopsy</span><span class="tool-tag">VirtualBox</span>
+          </div>
+        </div>
+        <div class="card tool-group reveal">
+          <div class="tool-group-label"><i class="fas fa-code"></i> Development & Scripting</div>
+          <div class="tool-tags">
+            <span class="tool-tag">Python</span><span class="tool-tag">Bash</span><span
+              class="tool-tag">Dart/Flutter</span>
+            <span class="tool-tag">SQL</span><span class="tool-tag">HTML/CSS/JS</span>
+          </div>
+        </div>
+        <div class="card tool-group reveal">
+          <div class="tool-group-label"><i class="fas fa-server"></i> Systems & Admin</div>
+          <div class="tool-tags">
+            <span class="tool-tag">Windows</span><span class="tool-tag">Linux</span><span class="tool-tag">VPN</span>
+            <span class="tool-tag">MDM</span><span class="tool-tag">Disaster Recovery</span>
+          </div>
+        </div>
+        <div class="card tool-group reveal">
+          <div class="tool-group-label"><i class="fas fa-palette"></i> Design & Productivity</div>
+          <div class="tool-tags">
+            <span class="tool-tag">Adobe Illustrator</span><span class="tool-tag">Photoshop</span><span
+              class="tool-tag">Canva</span>
+            <span class="tool-tag">Excel</span><span class="tool-tag">Power Query</span><span
+              class="tool-tag">VBA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEYOND THE TERMINAL -->
+  <section class="section-pad" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal">
+        <span class="label">// off-screen</span>
+        <h2 class="heading">Beyond the <em>Terminal</em></h2>
+      </div>
+      <div class="card reveal" style="padding: 2rem;">
+        <i class="fas fa-music" style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;"></i>
+        <p style="margin-bottom: 1rem; color: var(--text-muted); line-height: 1.6;">When I'm not auditing code or
+          tracing digital footprints, my focus shifts to music. I serve as the Music Director for my Catholic church
+          choir, where I arrange and teach a diverse repertoire of hymns, classical pieces, anthems, and traditional
+          highlife music.</p>
+        <p style="color: var(--text-muted); line-height: 1.6;">As a multi-instrumentalist playing five different
+          instruments, I am also deeply invested in studying jazz piano. Mastering complex musical theory and jazz
+          improvisation requires the exact same pattern recognition, structural logic, and rigorous discipline as
+          cybersecurity. It is simply applied to a different kind of keyboard.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank"><i class="fab fa-linkedin"></i>
+        LinkedIn</a>
+      <a href="https://github.com/gabe-dylan0109" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      <a href="mailto:gabrieldylan0109@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+    </div>
+    <p>&copy; 2026 Dylan Owusu Afriyie.</p>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 50));
+    const obs = new IntersectionObserver(entries => { entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 60); obs.unobserve(e.target); } }); }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>
