@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects | Dylan Owusu Afriyie</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+<style>
+  .projects-hero { padding: 8rem 0 2rem; }
+
+  .project-anchors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.4rem;
+    margin-top: 1.5rem;
+  }
+  .project-anchors a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  .project-anchors a:hover,
+  .project-anchors a:focus-visible { color: var(--accent); }
+  .project-anchors a:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .group-intro { margin-bottom: 2rem; }
+  .group-intro .heading { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+
+  .project-showcase { margin-bottom: 4rem; }
+  .project-showcase .project-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .project-showcase .project-type {
+    font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+    padding: 0.3rem 0.8rem; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .type-pentest { background: rgba(248,113,113,0.1); color: var(--red); }
+  .type-devsec { background: var(--accent-dim); color: var(--accent); }
+  .type-ops { background: var(--accent-dim); color: var(--accent); }
+  .type-ai { background: rgba(139, 92, 246, 0.1); color: #a78bfa; }
+  .type-forensics { background: rgba(52, 211, 153, 0.1); color: var(--green); }
+  .type-product { background: rgba(251, 191, 36, 0.1); color: var(--amber); }
+  .type-creative { background: rgba(6, 182, 212, 0.1); color: #22d3ee; }
+
+  .project-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .flagship-layout { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.4rem; align-items: start; }
+
+  .project-info h3 { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .flagship-info h3 { font-size: clamp(1.9rem, 3.4vw, 2.5rem); }
+  .project-info h3 em { font-style: italic; color: var(--accent); }
+  .project-info p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.2rem; }
+  .project-info .tech-used { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .project-info .tech-used span {
+    padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 4px;
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim);
+  }
+  .findings { margin-top: 1rem; }
+  .findings h4 { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .findings ul { list-style: none; padding: 0; }
+  .findings li {
+    font-size: 0.88rem; color: var(--text-muted); padding-left: 1.2rem;
+    position: relative; margin-bottom: 0.4rem; line-height: 1.5;
+  }
+  .findings li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  .findings.vuln li::before { background: var(--red); }
+  .findings.fix li::before { background: var(--green); }
+  .demo-note { font-size: 0.78rem; color: var(--text-dim); font-style: italic; margin-top: 0.8rem; }
+
+  .project-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .gallery-img {
+    border-radius: var(--radius-sm); overflow: hidden; cursor: pointer;
+    border: 1px solid var(--border); transition: var(--transition);
+  }
+  .gallery-img:hover { border-color: var(--border-hover); transform: scale(1.02); }
+  .gallery-img:first-child { grid-column: span 2; }
+  .gallery-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .shot-stage { display: flex; flex-direction: column; gap: 0.7rem; }
+  .shot-primary {
+    border-radius: var(--radius); overflow: hidden; cursor: pointer;
+    border: 1px solid var(--border); transition: var(--transition);
+  }
+  .shot-primary:hover { border-color: var(--border-hover); }
+  .shot-primary img { width: 100%; display: block; }
+  .shot-thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .shot-thumbs.three { grid-template-columns: 1fr 1fr 1fr; }
+  .shot-thumb {
+    border-radius: var(--radius-sm); overflow: hidden; cursor: pointer;
+    border: 1px solid var(--border); aspect-ratio: 16 / 10;
+  }
+  .shot-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot-thumb:hover { border-color: var(--border-hover); }
+  .view-shots {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 0.4px;
+  }
+  .view-shots:hover,
+  .view-shots:focus-visible { color: var(--accent); }
+  .view-shots:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+
+  .portrait-frame {
+    max-width: 420px;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .portrait-frame img { width: 100%; height: auto; display: block; }
+
+  .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .compact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  .text-feature {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+  }
+  .text-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1rem;
+  }
+  .text-feature-grid h4 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 0.35rem;
+  }
+  .text-feature-grid p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+  .project-divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+  .img-modal {
+    display: none; position: fixed; inset: 0; z-index: 5000;
+    background: rgba(7,11,20,0.92); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .img-modal.active { display: flex; }
+  .img-modal img { max-width: 960px; width: 86%; border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .img-modal-close,
+  .img-modal-nav {
+    position: fixed;
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    width: 40px; height: 40px; border-radius: 10px; font-size: 1.2rem; cursor: pointer;
+  }
+  .img-modal-close { top: 1.5rem; right: 1.5rem; }
+  .img-modal-nav.prev { left: 1.2rem; top: 50%; transform: translateY(-50%); }
+  .img-modal-nav.next { right: 1.2rem; top: 50%; transform: translateY(-50%); }
+  .img-modal-count {
+    position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .project-layout,
+    .flagship-layout,
+    .ai-grid,
+    .compact-grid { grid-template-columns: 1fr; }
+    .project-gallery { order: -1; }
+    .shot-thumbs.three { grid-template-columns: 1fr 1fr; }
+    .portrait-frame { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" id="siteNav">
+  <a href="index.html" class="nav-brand">Dylan <em>Afriyie</em></a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="designs.html">Designs</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section class="projects-hero">
+  <div class="container">
+    <span class="label reveal">// projects</span>
+    <h2 class="heading reveal">Systems, security &amp; <em>technical work</em>.</h2>
+    <p class="subtext reveal">A selection of systems, AI-assisted workflows, security labs and interactive projects built to solve operational problems, test ideas and deepen technical practice.</p>
+    <nav class="project-anchors reveal" aria-label="Project groups">
+      <a href="#flagship">Flagship Systems</a>
+      <a href="#ai-systems">AI-Assisted Systems</a>
+      <a href="#security">Security &amp; Forensics</a>
+      <a href="#operations">Operational Systems</a>
+      <a href="#interactive">Interactive Engineering</a>
+    </nav>
+  </div>
+</section>
+
+<section class="section-pad" id="flagship">
+  <div class="container">
+    <div class="group-intro reveal">
+      <span class="label">// flagship systems</span>
+      <h2 class="heading">Enterprise operations <em>platform</em></h2>
+    </div>
+
+    <div class="project-showcase reveal">
+      <div class="project-header">
+        <span class="project-type type-ops">Flagship System</span>
+      </div>
+      <div class="flagship-layout">
+        <div class="project-info flagship-info">
+          <h3>Mission <em>Control</em></h3>
+          <p>An internal operations platform built around task management, departmental coordination, secure access and operational visibility. It exists to keep work, people and records in one role-aware system rather than scattered tools.</p>
+          <div class="findings">
+            <h4>How it is structured</h4>
+            <ul>
+              <li>Mission and task workflows across departments</li>
+              <li>Messaging and operational dashboards</li>
+              <li>Financial and ledger workflows</li>
+              <li>Calendar and timeline views</li>
+              <li>Role-aware interfaces for different staff access</li>
+            </ul>
+          </div>
+          <div class="findings">
+            <h4>Security and access</h4>
+            <ul>
+              <li>Authentication with role-based access control</li>
+              <li>Row-Level Security in the data layer</li>
+              <li>Security review before staging and production deployment</li>
+            </ul>
+          </div>
+          <div class="tech-used">
+            <span>Next.js</span><span>Supabase</span><span>PostgreSQL</span><span>Tailwind CSS</span><span>Vercel</span>
+            <span>RBAC</span><span>RLS</span><span>Realtime</span>
+          </div>
+          <p class="demo-note">Selected interfaces shown with demonstration data.</p>
+        </div>
+        <div class="shot-stage">
+          <div class="shot-primary" onclick="openGallery('mission',0)">
+            <img src="images/mission_control_01.png" alt="Mission Control operations dashboard">
+          </div>
+          <div class="shot-thumbs">
+            <div class="shot-thumb" onclick="openGallery('mission',1)">
+              <img loading="lazy" src="images/mission_control_02.png" alt="Mission Control messaging interface">
+            </div>
+            <div class="shot-thumb" onclick="openGallery('mission',2)">
+              <img loading="lazy" src="images/mission_control_04.png" alt="Mission Control financial workflow with demonstration data">
+            </div>
+          </div>
+          <button type="button" class="view-shots" onclick="openGallery('mission',0)">View all screenshots</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="ai-systems" style="padding-top:0;">
+  <div class="container">
+    <div class="group-intro reveal">
+      <span class="label">// ai-assisted systems</span>
+      <h2 class="heading">Discovery and <em>intake</em></h2>
+    </div>
+    <div class="ai-grid">
+      <div class="project-showcase reveal">
+        <div class="project-header">
+          <span class="project-type type-ai">AI-Assisted</span>
+        </div>
+        <div class="project-info">
+          <h3>Client Intake <em>Intelligence</em></h3>
+          <p>A web application that captures public enquiries and uses server-side AI to draft structured problem summaries, fit classifications and follow-up questions before staff review.</p>
+          <div class="findings">
+            <h4>What it demonstrates</h4>
+            <ul>
+              <li>Server-side AI logic on incoming public forms</li>
+              <li>Human-in-the-loop review before action</li>
+              <li>Structured intake instead of unstructured inbox traffic</li>
+              <li>Separation between public submission and private staff workflow</li>
+            </ul>
+          </div>
+        </div>
+        <div class="portrait-frame" onclick="openGallery('intake',0)" style="margin-top:1.2rem;">
+          <img loading="lazy" src="images/client_intake_01.png" alt="Client Intake Intelligence public enquiry form">
+        </div>
+      </div>
+
+      <div class="project-showcase reveal">
+        <div class="project-header">
+          <span class="project-type type-ai">AI-Assisted</span>
+        </div>
+        <div class="project-info">
+          <h3>Project Scoping <em>Agent</em></h3>
+          <p>A conversational discovery agent that investigates the business problem, users, constraints and integrations before recommending implementation scope.</p>
+          <div class="findings">
+            <h4>What it demonstrates</h4>
+            <ul>
+              <li>Problem-first discovery rather than jumping to a build</li>
+              <li>Prompt and context engineering for requirements work</li>
+              <li>Structured briefs that keep scope under control</li>
+              <li>AI-assisted business workflow with human review</li>
+            </ul>
+          </div>
+        </div>
+        <div class="shot-primary" onclick="openGallery('scoping',0)" style="margin-top:1.2rem;">
+          <img loading="lazy" src="images/project_scoping_agent_01.png" alt="Project Scoping Agent discovery desk overview">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="security" style="padding-top:0;">
+  <div class="container">
+    <div class="group-intro reveal">
+      <span class="label">// security &amp; forensics</span>
+      <h2 class="heading">Practice under <em>control</em></h2>
+      <p class="subtext">Controlled environments and forensic exercises used to practise acquisition, analysis, vulnerability discovery, evidence handling and remediation.</p>
+    </div>
+
+    <div class="project-showcase reveal">
+      <div class="project-header">
+        <span class="project-type type-forensics">Digital Forensics</span>
+      </div>
+      <div class="text-feature">
+        <div class="project-info">
+          <h3>Android Mobile <em>Forensics</em></h3>
+          <p>A text-led practice record of controlled Android data acquisition and artefact analysis. This is lab and academic forensic methodology, not a public case file.</p>
+        </div>
+        <div class="text-feature-grid">
+          <div>
+            <h4>Controlled acquisition</h4>
+            <p>Structured collection of Android data in a controlled environment, with attention to what was obtained and how.</p>
+          </div>
+          <div>
+            <h4>Artefact analysis</h4>
+            <p>Examination of recovered artefacts to understand device activity without overstating conclusions.</p>
+          </div>
+          <div>
+            <h4>Evidence preservation</h4>
+            <p>Handling copies so original material remains intact for later review.</p>
+          </div>
+          <div>
+            <h4>Chain of custody</h4>
+            <p>Documenting who handled the evidence, when, and what changed between steps.</p>
+          </div>
+          <div>
+            <h4>Forensic workflow</h4>
+            <p>Written process from acquisition through analysis so the work can be repeated and reviewed.</p>
+          </div>
+        </div>
+        <div class="tech-used" style="margin-top:1.2rem;">
+          <span>Android</span><span>Magnet AXIOM</span><span>Autopsy</span><span>libimobiledevice</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-showcase reveal">
+      <div class="project-header">
+        <span class="project-type type-pentest"><i class="fas fa-bug"></i> Penetration Testing</span>
+      </div>
+      <div class="project-layout">
+        <div class="project-info">
+          <h3>Afriyie Bank — Vulnerable <em>Web Application</em> Lab</h3>
+          <p>A deliberately vulnerable banking web application prototyped as a penetration testing target. Simulates real-world financial application attack surfaces including authentication flows, session management, transaction handling, and input validation weaknesses.</p>
+          <div class="tech-used">
+            <span>Python</span><span>Flask</span><span>SQL</span><span>HTML/CSS/JS</span><span>Burp Suite</span>
+          </div>
+          <div class="findings vuln">
+            <h4><i class="fas fa-triangle-exclamation"></i> Vulnerabilities Discovered</h4>
+            <ul>
+              <li>Reflected XSS in transaction history search field</li>
+              <li>Missing CSRF protection on fund transfer forms</li>
+              <li>Hardcoded cryptographic secrets enabling session hijacking</li>
+              <li>Misconfigured server environment exposing interactive debugger</li>
+            </ul>
+          </div>
+          <div class="project-divider"></div>
+          <div class="findings fix">
+            <h4><i class="fas fa-shield-halved"></i> Remediation Applied</h4>
+            <ul>
+              <li>Input sanitisation and output encoding for XSS prevention</li>
+              <li>Implementation of anti-CSRF tokens on all state-changing forms</li>
+              <li>Migration of hardcoded secrets to secure environment variables</li>
+              <li>Disabling of interactive debuggers for production environments</li>
+              <li>All findings documented with CVSS scoring and OWASP Top 10 mapping</li>
+            </ul>
+          </div>
+        </div>
+        <div class="project-gallery">
+          <div class="gallery-img" onclick="openGallery('bank',0)"><img loading="lazy" src="images/bank2.png" alt="Afriyie Bank Dashboard"></div>
+          <div class="gallery-img" onclick="openGallery('bank',1)"><img loading="lazy" src="images/bank1.png" alt="Afriyie Bank Login"></div>
+          <div class="gallery-img" onclick="openGallery('bank',2)"><img loading="lazy" src="images/bank3.png" alt="XSS Test"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-showcase reveal">
+      <div class="project-header">
+        <span class="project-type type-devsec"><i class="fas fa-code"></i> DevSecOps</span>
+      </div>
+      <div class="project-layout">
+        <div class="project-info">
+          <h3>Image-to-PDF Converter — <em>Secure App</em> Prototyping Lab</h3>
+          <p>A cross-platform image-to-PDF application built with Flutter/Dart and a Python prototype. The project served as a controlled lab for practising full-cycle application security auditing: build, test, break, fix, document.</p>
+          <div class="tech-used">
+            <span>Flutter/Dart</span><span>Python</span><span>ADB</span><span>APK Decompilation</span><span>CSP</span>
+          </div>
+          <div class="findings vuln">
+            <h4><i class="fas fa-triangle-exclamation"></i> Security Audit Findings</h4>
+            <ul>
+              <li>Temporary file disclosure — sensitive PDFs accessible via ADB</li>
+              <li>Client-side DoS vulnerability via unbounded file input</li>
+              <li>Missing Content Security Policy headers on web build</li>
+              <li>HTTPS certificate validation gaps in network requests</li>
+            </ul>
+          </div>
+          <div class="project-divider"></div>
+          <div class="findings fix">
+            <h4><i class="fas fa-shield-halved"></i> Mitigations Implemented</h4>
+            <ul>
+              <li>Secure temp-file handling with immediate cleanup after export</li>
+              <li>Input size limits and streaming processing for memory safety</li>
+              <li>CSP and HTTP security header hardening on web deployment</li>
+              <li>Reproducible lab steps documented for stakeholder review</li>
+            </ul>
+          </div>
+        </div>
+        <div class="project-gallery">
+          <div class="gallery-img" onclick="openGallery('pdf',0)"><img loading="lazy" src="images/pdf1.png" alt="PDF Converter Empty"></div>
+          <div class="gallery-img" onclick="openGallery('pdf',1)"><img loading="lazy" src="images/pdf2.png" alt="PDF Converter Loaded"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="operations" style="padding-top:0;">
+  <div class="container">
+    <div class="group-intro reveal">
+      <span class="label">// operational systems</span>
+      <h2 class="heading">Product and <em>workflow</em> tools</h2>
+    </div>
+
+    <div class="project-showcase reveal">
+      <div class="project-header">
+        <span class="project-type type-product">SME Product</span>
+      </div>
+      <div class="project-layout">
+        <div class="project-info">
+          <h3>Daybook <em>GH</em></h3>
+          <p>A daily sales and expense tracker designed for Ghanaian micro and small businesses such as market traders, salons, online sellers and small service operators.</p>
+          <div class="findings">
+            <h4>What it demonstrates</h4>
+            <ul>
+              <li>Local-market product thinking around cash and Mobile Money</li>
+              <li>Simple financial-record workflows for non-technical users</li>
+              <li>A functional MVP rather than a heavy accounting suite</li>
+            </ul>
+          </div>
+          <p class="demo-note">Interfaces shown with sample demonstration data.</p>
+        </div>
+        <div class="shot-stage">
+          <div class="shot-primary" onclick="openGallery('daybook',0)">
+            <img loading="lazy" src="images/daybook_gh_01.png" alt="Daybook GH daily sales and expense dashboard">
+          </div>
+          <div class="shot-thumbs">
+            <div class="shot-thumb" onclick="openGallery('daybook',1)">
+              <img loading="lazy" src="images/daybook_gh_02.png" alt="Daybook GH activity and record view">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compact-grid">
+      <div class="project-showcase reveal">
+        <div class="project-header">
+          <span class="project-type type-ops">Operational Tool</span>
+        </div>
+        <div class="project-info">
+          <h3>Bug<em>Desk</em></h3>
+          <p>A compact defect-reporting companion used during Mission Control testing and rollout. Bugs move through Open, In Progress and Fixed, with a distinction between reporters and administrators.</p>
+        </div>
+        <div class="shot-primary" onclick="openGallery('bugdesk',0)" style="margin-top:1rem;">
+          <img loading="lazy" src="images/bugdesk_01.png" alt="BugDesk defect reporting dashboard">
+        </div>
+      </div>
+
+      <div class="project-showcase reveal">
+        <div class="project-header">
+          <span class="project-type type-product">Workflow</span>
+        </div>
+        <div class="project-info">
+          <h3>Personal Task <em>Tracker</em></h3>
+          <p>A customized dashboard for managing personal priorities and execution roadmaps without the overhead of a large commercial project-management suite.</p>
+        </div>
+        <div class="shot-primary" onclick="openGallery('tracker',0)" style="margin-top:1rem;">
+          <img loading="lazy" src="images/task_tracker_01.png" alt="Personal Task Tracker priority dashboard">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="interactive" style="padding-top:0;">
+  <div class="container">
+    <div class="group-intro reveal">
+      <span class="label">// interactive engineering</span>
+      <h2 class="heading">Audio, games and <em>spatial</em> interfaces</h2>
+    </div>
+
+    <div class="project-showcase reveal">
+      <div class="project-header">
+        <span class="project-type type-creative">Audio System</span>
+      </div>
+      <div class="flagship-layout">
+        <div class="project-info">
+          <h3>Solfa-<em>Echo</em></h3>
+          <p>A relative-pitch and ear-training web application. Users hear a sol-fa line, sing it back, and work through progressive exercise tiers with scoring and feedback.</p>
+          <div class="findings">
+            <h4>What was built</h4>
+            <ul>
+              <li>Browser-based audio playback through the Web Audio API</li>
+              <li>Voice interaction and calibration for practice sessions</li>
+              <li>Progressive exercise tiers with scoring and feedback</li>
+              <li>Responsive interface for practice on different screens</li>
+            </ul>
+          </div>
+          <div class="tech-used">
+            <span>Next.js</span><span>Web Audio API</span><span>Supabase</span>
+          </div>
+        </div>
+        <div class="shot-stage">
+          <div class="shot-primary" onclick="openGallery('solfa',0)">
+            <img loading="lazy" src="images/solfa_echo_01.png" alt="Solfa-Echo ear-training interface">
+          </div>
+          <div class="shot-thumbs three">
+            <div class="shot-thumb" onclick="openGallery('solfa',3)">
+              <img loading="lazy" src="images/solfa_echo_04.png" alt="Solfa-Echo practice session">
+            </div>
+            <div class="shot-thumb" onclick="openGallery('solfa',4)">
+              <img loading="lazy" src="images/solfa_echo_05.png" alt="Solfa-Echo exercise feedback">
+            </div>
+            <div class="shot-thumb" onclick="openGallery('solfa',7)">
+              <img loading="lazy" src="images/solfa_echo_08.png" alt="Solfa-Echo curriculum progress">
+            </div>
+          </div>
+          <button type="button" class="view-shots" onclick="openGallery('solfa',0)">View all screenshots</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-showcase reveal">
+      <div class="project-header">
+        <span class="project-type type-creative">Interactive Prototype</span>
+      </div>
+      <div class="project-layout">
+        <div class="project-info">
+          <h3>Accra <em>Metropolis</em></h3>
+          <p>A localized Ghanaian board-game prototype. Players host or join a room and move through Accra-inspired property play, with board-state management and multiplayer-oriented room codes.</p>
+          <div class="findings">
+            <h4>What it demonstrates</h4>
+            <ul>
+              <li>Game-state logic and interactive UI</li>
+              <li>Board-state management across a session</li>
+              <li>Localized product design using Ghanaian places and references</li>
+            </ul>
+          </div>
+        </div>
+        <div class="shot-stage">
+          <div class="shot-primary" onclick="openGallery('metropolis',0)">
+            <img loading="lazy" src="images/ghana_monopoly_01.png" alt="Accra Metropolis game lobby">
+          </div>
+          <div class="shot-thumbs">
+            <div class="shot-thumb" onclick="openGallery('metropolis',2)">
+              <img loading="lazy" src="images/ghana_monopoly_03.png" alt="Accra Metropolis board play">
+            </div>
+          </div>
+          <button type="button" class="view-shots" onclick="openGallery('metropolis',0)">View all screenshots</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="compact-grid">
+      <div class="project-showcase reveal">
+        <div class="project-header">
+          <span class="project-type type-creative">3D Web</span>
+        </div>
+        <div class="project-info">
+          <h3>Three.js Photo <em>Album</em></h3>
+          <p>An immersive 3D web gallery. Images sit in a navigable spatial scene rather than a flat grid, using Three.js and WebGL for scene interaction and canvas rendering.</p>
+        </div>
+        <div class="shot-stage" style="margin-top:1rem;">
+          <div class="shot-primary" onclick="openGallery('album',0)">
+            <img loading="lazy" src="images/threejs_album_01.png" alt="Three.js spatial photo album scene">
+          </div>
+          <div class="shot-thumbs">
+            <div class="shot-thumb" onclick="openGallery('album',1)">
+              <img loading="lazy" src="images/threejs_album_02.png" alt="Three.js photo album navigation view">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-showcase reveal">
+        <div class="project-header">
+          <span class="project-type type-creative">UI Concept</span>
+        </div>
+        <div class="project-info">
+          <h3>Real Estate <em>Viewing</em></h3>
+          <p>A conceptual property-viewing and architectural presentation portal. It organises listings, property information and visual viewing into a high-fidelity interface. This is a design and front-end concept, not a claimed client deployment.</p>
+        </div>
+        <div class="shot-stage" style="margin-top:1rem;">
+          <div class="shot-primary" onclick="openGallery('estate',0)">
+            <img loading="lazy" src="images/real_estate_01.png" alt="Real estate viewing portal home">
+          </div>
+          <div class="shot-thumbs">
+            <div class="shot-thumb" onclick="openGallery('estate',2)">
+              <img loading="lazy" src="images/real_estate_03.png" alt="Real estate property listing presentation">
+            </div>
+            <div class="shot-thumb" onclick="openGallery('estate',3)">
+              <img loading="lazy" src="images/real_estate_04.png" alt="Real estate architectural viewing interface">
+            </div>
+          </div>
+          <button type="button" class="view-shots" onclick="openGallery('estate',0)">View all screenshots</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="img-modal" id="imgModal" role="dialog" aria-modal="true" aria-label="Project screenshot viewer">
+  <button class="img-modal-close" id="imgModalClose" aria-label="Close screenshot viewer">&times;</button>
+  <button class="img-modal-nav prev" id="imgModalPrev" aria-label="Previous screenshot"><i class="fas fa-chevron-left"></i></button>
+  <img id="imgModalSrc" src="" alt="">
+  <button class="img-modal-nav next" id="imgModalNext" aria-label="Next screenshot"><i class="fas fa-chevron-right"></i></button>
+  <div class="img-modal-count" id="imgModalCount"></div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <a href="https://github.com/gabe-dylan0109" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    <a href="mailto:gabrieldylan0109@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+  </div>
+  <p>&copy; 2026 Dylan Owusu Afriyie.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('siteNav').classList.toggle('scrolled',window.scrollY>50));
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+const GALLERIES = {
+  mission: [
+    { src: 'images/mission_control_01.png', alt: 'Mission Control operations dashboard' },
+    { src: 'images/mission_control_02.png', alt: 'Mission Control messaging interface' },
+    { src: 'images/mission_control_04.png', alt: 'Mission Control financial workflow with demonstration data' },
+    { src: 'images/mission_control_05.png', alt: 'Mission Control ledger view with demonstration data' }
+  ],
+  intake: [
+    { src: 'images/client_intake_01.png', alt: 'Client Intake Intelligence public enquiry form' }
+  ],
+  scoping: [
+    { src: 'images/project_scoping_agent_01.png', alt: 'Project Scoping Agent discovery desk overview' }
+  ],
+  bank: [
+    { src: 'images/bank2.png', alt: 'Afriyie Bank Dashboard' },
+    { src: 'images/bank1.png', alt: 'Afriyie Bank Login' },
+    { src: 'images/bank3.png', alt: 'XSS Test' }
+  ],
+  pdf: [
+    { src: 'images/pdf1.png', alt: 'PDF Converter Empty' },
+    { src: 'images/pdf2.png', alt: 'PDF Converter Loaded' }
+  ],
+  daybook: [
+    { src: 'images/daybook_gh_01.png', alt: 'Daybook GH daily sales and expense dashboard' },
+    { src: 'images/daybook_gh_02.png', alt: 'Daybook GH activity and record view' }
+  ],
+  bugdesk: [
+    { src: 'images/bugdesk_01.png', alt: 'BugDesk defect reporting dashboard' }
+  ],
+  tracker: [
+    { src: 'images/task_tracker_01.png', alt: 'Personal Task Tracker priority dashboard' },
+    { src: 'images/task_tracker_02.png', alt: 'Personal Task Tracker certification roadmap' }
+  ],
+  solfa: [
+    { src: 'images/solfa_echo_01.png', alt: 'Solfa-Echo ear-training interface' },
+    { src: 'images/solfa_echo_02.png', alt: 'Solfa-Echo training home' },
+    { src: 'images/solfa_echo_03.png', alt: 'Solfa-Echo lesson view' },
+    { src: 'images/solfa_echo_04.png', alt: 'Solfa-Echo practice session' },
+    { src: 'images/solfa_echo_05.png', alt: 'Solfa-Echo exercise feedback' },
+    { src: 'images/solfa_echo_06.png', alt: 'Solfa-Echo scoring view' },
+    { src: 'images/solfa_echo_07.png', alt: 'Solfa-Echo voice calibration' },
+    { src: 'images/solfa_echo_08.png', alt: 'Solfa-Echo curriculum progress' }
+  ],
+  metropolis: [
+    { src: 'images/ghana_monopoly_01.png', alt: 'Accra Metropolis game lobby' },
+    { src: 'images/ghana_monopoly_02.png', alt: 'Accra Metropolis game setup' },
+    { src: 'images/ghana_monopoly_03.png', alt: 'Accra Metropolis board play' }
+  ],
+  album: [
+    { src: 'images/threejs_album_01.png', alt: 'Three.js spatial photo album scene' },
+    { src: 'images/threejs_album_02.png', alt: 'Three.js photo album navigation view' }
+  ],
+  estate: [
+    { src: 'images/real_estate_01.png', alt: 'Real estate viewing portal home' },
+    { src: 'images/real_estate_02.png', alt: 'Real estate listings overview' },
+    { src: 'images/real_estate_03.png', alt: 'Real estate property listing presentation' },
+    { src: 'images/real_estate_04.png', alt: 'Real estate architectural viewing interface' }
+  ]
+};
+
+const modal = document.getElementById('imgModal');
+const modalImg = document.getElementById('imgModalSrc');
+const modalCount = document.getElementById('imgModalCount');
+const modalPrev = document.getElementById('imgModalPrev');
+const modalNext = document.getElementById('imgModalNext');
+let currentGallery = [];
+let currentIndex = 0;
+
+function showCurrent() {
+  const item = currentGallery[currentIndex];
+  if (!item) return;
+  modalImg.src = item.src;
+  modalImg.alt = item.alt;
+  modalCount.textContent = (currentIndex + 1) + ' / ' + currentGallery.length;
+  const many = currentGallery.length > 1;
+  modalPrev.hidden = !many;
+  modalNext.hidden = !many;
+}
+
+function openGallery(name, index) {
+  currentGallery = GALLERIES[name] || [];
+  if (!currentGallery.length) return;
+  currentIndex = Math.max(0, Math.min(index || 0, currentGallery.length - 1));
+  showCurrent();
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('imgModalClose').focus();
+}
+
+function closeGallery() {
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+  modalImg.src = '';
+}
+
+function stepGallery(dir) {
+  if (currentGallery.length < 2) return;
+  currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
+  showCurrent();
+}
+
+document.getElementById('imgModalClose').addEventListener('click', closeGallery);
+modalPrev.addEventListener('click', function () { stepGallery(-1); });
+modalNext.addEventListener('click', function () { stepGallery(1); });
+modal.addEventListener('click', function (e) { if (e.target === this) closeGallery(); });
+document.addEventListener('keydown', function (e) {
+  if (!modal.classList.contains('active')) return;
+  if (e.key === 'Escape') closeGallery();
+  if (e.key === 'ArrowLeft') stepGallery(-1);
+  if (e.key === 'ArrowRight') stepGallery(1);
+});
+</script>
+</body>
+</html>

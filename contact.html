@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Dylan Owusu Afriyie</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  .contact-hero { padding: 8rem 0 3rem; text-align: center; }
+  .contact-hero .heading { margin: 0 auto 1rem; }
+  .contact-hero .subtext { margin: 0 auto 0.8rem; text-align: center; }
+  .availability {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin: 0 auto 2rem;
+    max-width: 520px;
+  }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.15fr; gap: 2rem;
+    max-width: 920px; margin: 0 auto;
+  }
+
+  .contact-info-cards { display: flex; flex-direction: column; gap: 0.7rem; }
+
+  .contact-portrait {
+    margin: 0 0 0.2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+  .contact-portrait img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center 18%;
+  }
+  .contact-portrait figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    padding: 0.55rem 0.85rem 0.7rem;
+  }
+
+  .info-card {
+    display: flex; align-items: center; gap: 0.85rem;
+    padding: 0.85rem 1rem;
+  }
+  .info-card .info-icon {
+    width: 36px; height: 36px; min-width: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; font-size: 0.95rem;
+    background: var(--accent-dim); color: var(--accent);
+  }
+  .info-card h4 { font-size: 0.78rem; margin-bottom: 0.1rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.4px; }
+  .info-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.4; }
+  .info-card .role-org { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.15rem; }
+  .info-card a { color: var(--accent); text-decoration: none; transition: opacity 0.3s; }
+  .info-card a:hover,
+  .info-card a:focus-visible { opacity: 0.8; }
+  .info-card a:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+
+  .social-row { display: flex; gap: 0.8rem; margin-top: 0.3rem; }
+  .social-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-muted); font-size: 1.1rem;
+    transition: var(--transition);
+  }
+  .social-btn:hover,
+  .social-btn:focus-visible { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .social-btn:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+
+  .contact-form-card { padding: 2rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block; font-size: 0.82rem; font-weight: 600;
+    color: var(--text-muted); margin-bottom: 0.4rem; letter-spacing: 0.3px;
+  }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 0.8rem 1rem;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); color: var(--text);
+    font-family: var(--font-body); font-size: 0.9rem;
+    transition: border-color 0.3s; outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  .form-note {
+    font-size: 0.78rem; color: var(--text-dim); margin-bottom: 1.2rem;
+    font-style: italic;
+  }
+
+  .submit-btn {
+    width: 100%; padding: 0.9rem; background: var(--accent); color: var(--bg);
+    border: none; border-radius: var(--radius-sm);
+    font-family: var(--font-body); font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; transition: var(--transition);
+  }
+  .submit-btn:hover { box-shadow: 0 0 25px var(--accent-glow); transform: translateY(-1px); }
+  .submit-btn:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+  .cv-section {
+    text-align: center; margin-top: 3rem; padding: 2.4rem 2rem;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); max-width: 920px; margin-left: auto; margin-right: auto;
+  }
+  .cv-section h3 { font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .cv-section h3 em { font-style: italic; color: var(--accent); }
+  .cv-section p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.5rem; }
+
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-portrait { max-width: 360px; margin-left: auto; margin-right: auto; }
+  }
+  @media (max-width: 480px) {
+    .contact-portrait img { max-height: 380px; }
+    .contact-form-card { padding: 1.4rem 1.1rem; }
+  }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="siteNav">
+  <a href="index.html" class="nav-brand">Dylan <em>Afriyie</em></a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="designs.html">Designs</a>
+    <a href="contact.html" class="active nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section class="contact-hero">
+  <div class="container">
+    <span class="label reveal">// connect</span>
+    <h2 class="heading reveal">Let's <em>connect</em>.</h2>
+    <p class="subtext reveal">For roles, collaborations, technical projects or a conversation about my work, feel free to reach out.</p>
+    <p class="availability reveal">Open to cybersecurity, digital forensics, IT and software opportunities.</p>
+  </div>
+</section>
+
+<section class="section-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-info-cards">
+        <figure class="contact-portrait reveal">
+          <img src="images/ghana_portrait.png" alt="Dylan Afriyie in traditional Ghanaian attire">
+          <figcaption>Based in Accra, Ghana</figcaption>
+        </figure>
+
+        <div class="card info-card reveal">
+          <div class="info-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:gabrieldylan0109@gmail.com">gabrieldylan0109@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="card info-card reveal">
+          <div class="info-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <h4>Phone</h4>
+            <p>+233 20 820 3691 / +233 54 468 1539</p>
+          </div>
+        </div>
+        <div class="card info-card reveal">
+          <div class="info-icon"><i class="fas fa-location-dot"></i></div>
+          <div>
+            <h4>Location</h4>
+            <p>Accra, Ghana</p>
+          </div>
+        </div>
+        <div class="card info-card reveal">
+          <div class="info-icon"><i class="fas fa-building"></i></div>
+          <div>
+            <h4>Current Role</h4>
+            <p>Cyber Intelligence Analyst | Industrial Attachment</p>
+            <p class="role-org">Ghana Police Service · CID Cybercrime Unit</p>
+          </div>
+        </div>
+
+        <div class="social-row reveal">
+          <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/gabe-dylan0109" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="mailto:gabrieldylan0109@gmail.com" class="social-btn" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <div class="card contact-form-card reveal">
+        <form id="contactForm" action="mailto:gabrieldylan0109@gmail.com" method="get">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required placeholder="Job opportunity, collaboration or project">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Tell me what you'd like to discuss..."></textarea>
+          </div>
+          <p class="form-note">Opens your email app with the message pre-filled.</p>
+          <button type="submit" class="submit-btn"><i class="fas fa-envelope"></i> Compose Email</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="cv-section reveal">
+      <h3>Download my <em>CV</em></h3>
+      <p>Full details of my experience, education, certifications, technical skills and project work.</p>
+      <a href="Dylan_Owusu_Afriyie_CV.pdf" download="Dylan_Owusu_Afriyie_CV.pdf" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Download CV (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <a href="https://github.com/gabe-dylan0109" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    <a href="mailto:gabrieldylan0109@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+  </div>
+  <p>&copy; 2026 Dylan Owusu Afriyie.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('siteNav').classList.toggle('scrolled',window.scrollY>50));
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const subject = document.getElementById('subject').value.trim();
+  const message = document.getElementById('message').value.trim();
+  if (!name || !email || !subject || !message) return;
+  const body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
+  window.location.href = 'mailto:gabrieldylan0109@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dylan Owusu Afriyie | Cyber Intelligence Analyst</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* ═══ HERO ═══ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .hero-text {
+      flex: 1.4;
+    }
+
+    .hero-visual {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: 50px;
+      padding: 0.35rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge .pulse {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .typing-row {
+      font-family: var(--font-mono);
+      font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+      min-height: 1.8rem;
+    }
+
+    .hero-domains {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.4px;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .typing-row .cursor {
+      color: var(--accent);
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .hero p {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem 1.75rem;
+    }
+
+    .hero-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+      transition: color 0.3s ease;
+    }
+
+    .hero-links a .arrow {
+      display: inline-block;
+      color: var(--accent);
+      margin-left: 0.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-links a:hover,
+    .hero-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .hero-links a:hover .arrow,
+    .hero-links a:focus-visible .arrow {
+      transform: translateX(3px);
+    }
+
+    .hero-links a:focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    /* Photo */
+    .photo-frame {
+      position: relative;
+      width: 320px;
+      height: 380px;
+      --px: 0px;
+      --py: 0px;
+      --lift: 0px;
+      --ps: 1;
+      transform: translate3d(var(--px), calc(var(--py) + var(--lift)), 0) scale(var(--ps));
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 20px;
+      border: 2px solid var(--border);
+      position: relative;
+      z-index: 2;
+      transition: border-color 0.45s ease, box-shadow 0.45s ease;
+    }
+
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      border: 2px solid var(--accent);
+      opacity: 0.22;
+      z-index: 1;
+      animation: portraitEdge 10s ease-in-out infinite;
+    }
+
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      bottom: -25px;
+      right: -25px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--accent);
+      filter: blur(50px);
+      opacity: 0.2;
+    }
+
+    @keyframes portraitEdge {
+      0%,
+      100% {
+        opacity: 0.16;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .photo-frame:hover {
+        --lift: -3px;
+        --ps: 1.015;
+      }
+
+      .photo-frame:hover img {
+        border-color: rgba(0, 209, 255, 0.42);
+        box-shadow: 0 0 22px rgba(0, 209, 255, 0.12);
+      }
+    }
+
+    @media (hover: none),
+    (pointer: coarse) {
+      .photo-frame {
+        --px: 0px;
+        --py: 0px;
+        --lift: 0px;
+        --ps: 1;
+        transform: none;
+      }
+
+      .photo-frame::before {
+        animation: none;
+        opacity: 0.22;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .photo-frame,
+      .photo-frame img {
+        transition: none;
+        transform: none;
+      }
+
+      .photo-frame::before {
+        animation: none;
+        opacity: 0.22;
+      }
+    }
+
+    /* Proof strip */
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .proof-title {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .proof-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    /* Closing CTA */
+    .close-cta .heading {
+      max-width: 640px;
+    }
+
+    /* ═══ CERT WALL ═══ */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .cert-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+
+    .cert-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    .cert-card .cert-info {
+      padding: 0.8rem 1rem;
+    }
+
+    .cert-card .cert-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .cert-card .cert-issuer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .cert-card .cert-badge {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* ═══ LEARNING ═══ */
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .learn-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .learn-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .learn-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .learn-icon.blue {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .learn-icon.green {
+      background: rgba(52, 211, 153, 0.08);
+      color: var(--green);
+    }
+
+    .learn-icon.amber {
+      background: rgba(251, 191, 36, 0.08);
+      color: var(--amber);
+    }
+
+    .learn-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .learn-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .learn-progress {
+      margin-top: 0.8rem;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .learn-progress .bar {
+      height: 100%;
+      border-radius: 2px;
+      background: var(--accent);
+    }
+
+    /* ═══ CAPABILITY ═══ */
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .capability-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+    }
+
+    .capability-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .capability-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .capability-card h3 {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.8rem;
+    }
+
+    .capability-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .capability-card li {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding-left: 1rem;
+      position: relative;
+      margin-bottom: 0.35rem;
+      line-height: 1.5;
+    }
+
+    .capability-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* ═══ AMBIENT ═══ */
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-1 {
+      width: 450px;
+      height: 450px;
+      background: var(--accent);
+      top: -100px;
+      right: -50px;
+      opacity: 0.06;
+    }
+
+    .glow-2 {
+      width: 350px;
+      height: 350px;
+      background: #6366F1;
+      bottom: 15%;
+      left: -80px;
+      opacity: 0.04;
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 900px) {
+      .hero-inner {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .photo-frame {
+        width: 220px;
+        height: 260px;
+      }
+
+      .hero p {
+        margin: 0 auto 2rem;
+      }
+
+      .hero-btns {
+        justify-content: center;
+      }
+
+      .hero-links {
+        justify-content: center;
+      }
+
+      .hero-proof {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+
+      .hero-domains {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .capability-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* Modal for cert preview */
+    .cert-modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(7, 11, 20, 0.9);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .cert-modal-bg.active {
+      display: flex;
+    }
+
+    .cert-modal-bg img {
+      max-width: 700px;
+      width: 90%;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .cert-modal-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <!-- NAV -->
+  <nav class="site-nav" id="siteNav">
+    <a href="index.html" class="nav-brand">Dylan <em>Afriyie</em></a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><i
+        class="fas fa-bars"></i></button>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="designs.html">Designs</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="heroSection">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="status-badge"><span class="pulse"></span> CID Cybercrime Unit — Active Attachment</div>
+          <h1>Cyber Intelligence<br>&amp; <em>Digital Forensics</em></h1>
+          <div class="typing-row"><span id="typeTarget"></span><span class="cursor">|</span></div>
+          <div class="hero-domains">Cyber Intelligence | Digital Forensics | Cybersecurity | Systems and Software</div>
+          <p>MSc Digital Forensics and Cybersecurity with Distinction, with hands-on experience in cyber intelligence, digital investigations, application security and secure systems development.</p>
+          <div class="hero-links">
+            <a href="about.html">About Me <span class="arrow" aria-hidden="true">→</span></a>
+            <a href="#credentials">View Credentials <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-proof">
+            <div class="proof">
+              <div class="proof-title">MSc Distinction</div>
+              <div class="proof-label">Digital Forensics &amp; Cybersecurity</div>
+            </div>
+            <div class="proof">
+              <div class="proof-title">ISC2 CC</div>
+              <div class="proof-label">Certified in Cybersecurity</div>
+            </div>
+            <div class="proof">
+              <div class="proof-title">CID Cybercrime Unit</div>
+              <div class="proof-label">Cyber Intelligence Analyst</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="photo-frame"><img src="images/pfp.png" alt="Dylan Owusu Afriyie"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITY -->
+  <section class="section-pad" id="capabilitySection">
+    <div class="container">
+      <div class="reveal">
+        <span class="label">// what I do</span>
+      </div>
+      <div class="capability-grid">
+        <div class="capability-card reveal">
+          <h3>Investigate</h3>
+          <ul>
+            <li>Cyber intelligence</li>
+            <li>OSINT</li>
+            <li>CDR and metadata analysis</li>
+            <li>Mobile Money and banking-flow analysis</li>
+          </ul>
+        </div>
+        <div class="capability-card reveal">
+          <h3>Secure</h3>
+          <ul>
+            <li>Digital forensics</li>
+            <li>Application security</li>
+            <li>Evidence handling</li>
+            <li>Vulnerability assessment</li>
+          </ul>
+        </div>
+        <div class="capability-card reveal">
+          <h3>Build</h3>
+          <ul>
+            <li>Secure systems</li>
+            <li>Next.js and Supabase</li>
+            <li>RBAC and Row-Level Security</li>
+            <li>AI-assisted workflows</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section class="section-pad" id="credentials" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal">
+        <span class="label">// credentials</span>
+        <h2 class="heading">Credential <em>Vault</em></h2>
+        <p class="subtext">Academic and professional credentials in digital forensics, cybersecurity, and penetration testing. Click any
+          badge to view the full document.</p>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card reveal" onclick="openCert('images/cert_masters.png')">
+          <img src="images/cert_masters.png" alt="MSc Digital Forensics and Cybersecurity, GIMPA">
+          <div class="cert-info">
+            <div class="cert-name">MSc Digital Forensics and Cybersecurity</div>
+            <div class="cert-issuer">GIMPA · Distinction · May 2026</div>
+            <span class="cert-badge">Degree</span>
+          </div>
+        </div>
+        <div class="cert-card reveal" onclick="openCert('images/cert_pentest.png')">
+          <img src="images/cert_pentest.png" alt="Pen Testing 2025">
+          <div class="cert-info">
+            <div class="cert-name">Penetration Testing 2025</div>
+            <div class="cert-issuer">IT Masters / Charles Sturt University</div>
+            <span class="cert-badge">88% Distinction</span>
+          </div>
+        </div>
+        <div class="cert-card reveal" onclick="openCert('images/cert_isc2.png')">
+          <img src="images/cert_isc2.png" alt="ISC2 CC">
+          <div class="cert-info">
+            <div class="cert-name">Certified in Cybersecurity (CC)</div>
+            <div class="cert-issuer">ISC2</div>
+          </div>
+        </div>
+        <div class="cert-card reveal" onclick="openCert('images/cert_osint.png')">
+          <img src="images/cert_osint.png" alt="OSINT">
+          <div class="cert-info">
+            <div class="cert-name">Introduction to OSINT</div>
+            <div class="cert-issuer">Security Blue Team</div>
+          </div>
+        </div>
+        <div class="cert-card reveal" onclick="openCert('images/cert_network.png')">
+          <img src="images/cert_network.png" alt="Network Analysis">
+          <div class="cert-info">
+            <div class="cert-name">Network Analysis</div>
+            <div class="cert-issuer">Security Blue Team</div>
+          </div>
+        </div>
+        <div class="cert-card reveal" onclick="openCert('images/cert_ncc.png')">
+          <img src="images/cert_ncc.png" alt="NCC Cybersecurity">
+          <div class="cert-info">
+            <div class="cert-name">Cybersecurity Short Course</div>
+            <div class="cert-issuer">NCC Education</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENTLY LEARNING -->
+  <section class="section-pad" id="learningSection" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal">
+        <span class="label">// growth</span>
+        <h2 class="heading">Currently <em>Learning</em></h2>
+      </div>
+      <div class="learning-grid">
+        <div class="learn-card reveal">
+          <div class="learn-icon green"><i class="fas fa-bug"></i></div>
+          <h4>Certified Ethical Hacker (CEH) Preparation</h4>
+          <p>Preparing across ethical hacking methodology, reconnaissance, vulnerability analysis, network and web
+            security, exploitation concepts and defensive countermeasures.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:14%; background:var(--green);"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon" style="background: rgba(239, 68, 68, 0.08); color: #ef4444;"><i
+              class="fas fa-shield-halved"></i></div>
+          <h4>CompTIA Security+ (SY0-701)</h4>
+          <p>Building deeper coverage of security operations, network defense, identity and access management, risk,
+            incident response and security architecture.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:16%; background: #ef4444;"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon amber"><i class="fas fa-robot"></i></div>
+          <h4>Oracle Agentic AI Foundations Associate</h4>
+          <p>Preparing for the Oracle pathway. Studying agent architecture, orchestration, tool use, multi-agent
+            concepts and foundational patterns for building agentic AI systems.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:12%; background:var(--amber);"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon blue"><i class="fas fa-shield-halved"></i></div>
+          <h4>AI Security Fundamentals</h4>
+          <p>Microsoft Learn. In progress: studying AI-specific threats, security controls, prompt injection, model
+            manipulation, data protection and introductory AI security testing.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:18%; background:var(--accent);"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon" style="background: rgba(6, 182, 212, 0.08); color: #06b6d4;"><i
+              class="fas fa-brain"></i></div>
+          <h4>AI Fluency: Framework &amp; Foundations</h4>
+          <p>Anthropic Academy. Developing practical AI fluency around delegation, description, discernment and
+            responsible collaboration with AI systems.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:12%; background: #06b6d4;"></div>
+          </div>
+        </div>
+        <div class="learn-card reveal">
+          <div class="learn-icon" style="background: rgba(249, 115, 22, 0.08); color: #f97316;"><i
+              class="fas fa-network-wired"></i></div>
+          <h4>Agentic AI &amp; Model Context Protocol</h4>
+          <p>Learning how AI systems connect to tools, data and external services through structured context, agent
+            workflows and MCP-based integrations.</p>
+          <div class="learn-progress">
+            <div class="bar" style="width:10%; background: #f97316;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="section-pad" id="closeCta" style="padding-top:0;">
+    <div class="container">
+      <div class="close-cta reveal">
+        <span class="label">// explore the work</span>
+        <h2 class="heading">Systems, security labs and <em>technical projects</em>.</h2>
+        <p class="subtext">A closer look at the systems, security work and experiments behind the profile.</p>
+        <div class="hero-btns">
+          <a href="projects.html" class="btn btn-primary"><i class="fas fa-folder-open"></i> Explore Projects</a>
+          <a href="Dylan_Owusu_Afriyie_CV.pdf" class="btn btn-ghost" download="Dylan_Owusu_Afriyie_CV.pdf"><i class="fas fa-download"></i> Download CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERT MODAL -->
+  <div class="cert-modal-bg" id="certModal">
+    <button class="cert-modal-close" onclick="closeCert()">&times;</button>
+    <img id="certModalImg" src="" alt="Certificate">
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/dylan-afriyie-3aa854273/" target="_blank"><i class="fab fa-linkedin"></i>
+        LinkedIn</a>
+      <a href="https://github.com/gabe-dylan0109" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      <a href="mailto:gabrieldylan0109@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+    </div>
+    <p>&copy; 2026 Dylan Owusu Afriyie</p>
+  </footer>
+
+  <script>
+    // Typing
+    const roles = ["Cyber Intelligence Analyst", "Digital Forensics & Cybersecurity", "Systems & Software Builder"];
+    let ri = 0, ci = 0, del = false;
+    const t = document.getElementById('typeTarget');
+    function type() {
+      const w = roles[ri];
+      if (!del) { t.textContent = w.substring(0, ci++); if (ci > w.length) { del = true; setTimeout(type, 2000); return; } setTimeout(type, 65); }
+      else { t.textContent = w.substring(0, ci--); if (ci < 0) { del = false; ri = (ri + 1) % roles.length; setTimeout(type, 400); return; } setTimeout(type, 35); }
+    }
+    type();
+
+    // Nav scroll
+    window.addEventListener('scroll', () => document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 50));
+
+    // Reveal
+    const obs = new IntersectionObserver(entries => { entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 60); obs.unobserve(e.target); } }); }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Cert modal
+    function openCert(src) { document.getElementById('certModalImg').src = src; document.getElementById('certModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeCert() { document.getElementById('certModal').classList.remove('active'); document.body.style.overflow = 'auto'; }
+    document.getElementById('certModal').addEventListener('click', function (e) { if (e.target === this) closeCert(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCert(); });
+
+    (function () {
+      const frame = document.querySelector('.photo-frame');
+      if (!frame) return;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+      const maxShift = 5;
+      function canParallax() { return !reduceMotion.matches && finePointer.matches; }
+      function resetShift() {
+        frame.style.setProperty('--px', '0px');
+        frame.style.setProperty('--py', '0px');
+      }
+      frame.addEventListener('mousemove', function (e) {
+        if (!canParallax()) return;
+        const r = frame.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        frame.style.setProperty('--px', (x * maxShift) + 'px');
+        frame.style.setProperty('--py', (y * maxShift) + 'px');
+      });
+      frame.addEventListener('mouseleave', resetShift);
+      reduceMotion.addEventListener('change', function () { if (!canParallax()) resetShift(); });
+    })();
+  </script>
+</body>
+
+</html>

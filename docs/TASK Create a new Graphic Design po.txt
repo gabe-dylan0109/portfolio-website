@@ -1,0 +1,87 @@
+TASK: Create a new Graphic Design portfolio page and add its navigation link across all existing pages.
+
+═══ PART 1: CREATE designs.html ═══
+
+Create a new file called designs.html in the project root directory.
+
+Structure:
+- Copy the exact same <head> setup from projects.html (charset, viewport, style.css link, Font Awesome CDN)
+- Copy the exact same <nav class="site-nav"> from projects.html, but set the "Designs" link as class="active" instead of "Projects"
+- Copy the exact same <footer> from projects.html
+- Copy the exact same <script> block at the bottom for nav scroll, reveal animations, and image modal logic
+
+Page content (placed between nav and footer):
+
+1. HERO SECTION
+   - Class: section with padding-top 8rem
+   - Label: <span class="label reveal">// design work</span>
+   - Heading: <h2 class="heading reveal">Graphic Design <em>Portfolio</em></h2>
+   - Subtext: <p class="subtext reveal">Professional design work spanning corporate branding, legal documentation, packaging, and visual communications — built over a decade of client-facing work for government and private-sector organisations.</p>
+
+2. GALLERY GRID
+   - Use a responsive CSS Grid: 3 columns on desktop (min 280px), 2 on tablet, 1 on mobile
+   - Grid gap: 1rem
+   - Each item is a card using: background: var(--bg-card), border: 1px solid var(--border), border-radius: var(--radius), overflow: hidden, transition: var(--transition)
+   - On hover: border-color changes to var(--border-hover), transform: translateY(-4px), and the card gets the same top-glow ::before effect used in style.css .card
+   - Each card contains:
+     a) An <img> filling the card width, aspect-ratio: 4/3, object-fit: cover
+     b) A caption area with padding 0.8rem 1rem containing:
+        - A title in font-size 0.88rem, font-weight 600, color var(--text)
+        - A subtitle in font-size 0.78rem, color var(--text-muted)
+   - Each card is clickable — onclick opens the image full-size in a modal
+   - Add class="reveal" to each card for scroll animation
+
+3. IMAGE MODAL
+   - Reuse the exact same modal pattern from projects.html:
+     .img-modal, .img-modal.active, .img-modal-close, openImg(), closeImg()
+   - Same keyboard (Escape to close) and click-outside-to-close behaviour
+
+4. Use these images from the images/ folder (UPDATE THIS LIST with your actual filenames):
+   - design_1.jpg — caption: "Corporate Brand Identity" / "Client: De-Bamfo Quality Enterprise"
+   - design_2.jpg — caption: "Business Flyer Design" / "Professional"
+   - design_3.jpg — caption: "Corporate Brand Identity" / "Professional"
+   - design_4.jpg — caption: "Corporate Brand Identity" / "Professional"
+   - design_5.jpg — caption: "Visual Communications" / "Corporate"
+   - design_6.jpg — caption: "Logo Design" / "Professional"
+   - design_7.jpg — caption: "Logo Design" / "Professional"
+   - design_8.jpg — caption: "Business Flyer Design" / "Professional"
+   - design_9.jpg — caption: "Business Banner Design" / "Professional"
+   - design_10.jpg — caption: "Visual Communications" / "Professional"
+   - design_11.jpg — caption: "Visual Communications" / "Professional"
+   - design_12.jpg — caption: "Visual Communications" / "Professional"
+   - design_13.jpg — caption: "Visual Communications" / "Professional"
+   - design_14.jpg — caption: "Visual Communications" / "Professional"
+   - design_15.jpg — caption: "Logo Design" / "Professional"
+
+
+5. PAGE-SPECIFIC STYLES
+   - Write all page-specific CSS inside a <style> block in the <head>, NOT in style.css
+   - Only use CSS variables already defined in style.css (--bg-card, --border, --border-hover, --radius, --text, --text-muted, --accent, --transition, --font-display, --font-body)
+   - Do NOT create any new CSS variables or override existing ones
+
+═══ PART 2: UPDATE NAVIGATION ON ALL PAGES ═══
+
+In ALL FOUR existing files (index.html, about.html, projects.html, contact.html), find the <div class="nav-links"> block and add a new link for Designs.
+
+The nav link order should be:
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="designs.html">Designs</a>
+  <a href="contact.html" class="nav-cta">Contact</a>
+
+CRITICAL RULES:
+- Do NOT modify any existing section content, styles, or structure in the four existing files
+- ONLY touch the <div class="nav-links"> block in each file — nothing else
+- Preserve whichever link currently has class="active" in each file — do not change it
+- In designs.html, set the Designs link as: <a href="designs.html" class="active">Designs</a>
+
+═══ VERIFICATION ═══
+
+After completing both parts, confirm:
+1. designs.html exists and renders correctly in the browser
+2. All five pages show the same 5-link navigation
+3. No existing content on any page was modified
+4. The gallery grid is responsive (3 cols → 2 cols → 1 col)
+5. Clicking any image opens it in a modal overlay
+6. All reveal animations work on scroll
