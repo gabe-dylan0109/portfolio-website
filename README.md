@@ -4,7 +4,9 @@ A dark-themed, responsive portfolio website for a Cyber Intelligence Analyst and
 
 ## 🌐 Live Preview
 
-Open `index.html` in any modern browser, or serve locally:
+**GitHub Pages:** [https://gabe-dylan0109.github.io/portfolio-website/](https://gabe-dylan0109.github.io/portfolio-website/)
+
+To preview locally, open `index.html` in any modern browser, or serve:
 
 ```bash
 # Python
@@ -88,6 +90,14 @@ Contact form (mailto-based), info cards (email, phone, location, current role), 
 - **Email:** gabrieldylan0109@gmail.com
 - **LinkedIn:** [dylan-afriyie](https://www.linkedin.com/in/dylan-afriyie-3aa854273/)
 - **GitHub:** [gabe-dylan0109](https://github.com/gabe-dylan0109)
+
+## Portfolio v2 Migration
+
+- The legacy static GitHub Pages site remains the production baseline.
+- v2 uses Next.js App Router, TypeScript and Tailwind CSS.
+- Development occurs on `portfolio-v2`.
+- Migration is being executed sprint by sprint.
+- Production cutover has NOT occurred yet.
 
 ## 📝 License
 

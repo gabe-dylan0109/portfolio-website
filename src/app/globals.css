@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f0e8;
+  --surface: #fbf7f0;
+  --foreground: #1b2230;
+  --muted-foreground: #5c6573;
+  --border: #d5cfc3;
+  --accent: #2f4f86;
+  --accent-hover: #274373;
+  --accent-foreground: #f7f4ee;
+  --section-dark: #101820;
+  --section-light: #f4f0e8;
+  --focus-ring: #2f4f86;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --container: 70rem;
+  --gutter: 1.25rem;
+  --shadow: 0 14px 36px rgba(16, 24, 32, 0.08);
+}
+
+.theme-dark {
+  --background: #101820;
+  --surface: #182232;
+  --foreground: #ede8de;
+  --muted-foreground: #a4adb8;
+  --border: rgba(237, 232, 222, 0.14);
+  --accent: #2f4f86;
+  --accent-hover: #3a5c96;
+  --accent-foreground: #f7f4ee;
+  --focus-ring: #c5d0e0;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-section-dark: var(--section-dark);
+  --color-section-light: var(--section-light);
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
+  --radius-md: var(--radius);
+  --radius-sm: var(--radius-sm);
+  --shadow-soft: var(--shadow);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.65;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+    color: var(--foreground);
+  }
+}
+
+@layer components {
+  .type-display {
+    font-family: var(--font-serif), ui-serif, Georgia, serif;
+    font-size: clamp(2.6rem, 7vw, 4.4rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .type-h1 {
+    font-family: var(--font-serif), ui-serif, Georgia, serif;
+    font-size: clamp(2.1rem, 4.8vw, 3.25rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .type-h2 {
+    font-family: var(--font-serif), ui-serif, Georgia, serif;
+    font-size: clamp(1.7rem, 3.2vw, 2.35rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .type-h3 {
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .type-body-lg {
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    line-height: 1.7;
+    max-width: 40rem;
+  }
+
+  .type-body {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .type-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .type-eyebrow {
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  .type-meta {
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--muted-foreground);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    z-index: 80;
+    transform: translateY(-140%);
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: var(--accent-foreground);
+    padding: 0.6rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 2rem;
+  }
+}
