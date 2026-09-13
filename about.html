@@ -33,12 +33,12 @@
 
     .about-portrait {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
     }
 
     .about-portrait img {
       width: 100%;
-      max-width: 360px;
+      max-width: 420px;
       height: auto;
       object-fit: contain;
       transition: transform 0.4s ease;
@@ -51,7 +51,8 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .about-portrait img {
+      .about-portrait img,
+      .about-portrait:hover img {
         transition: none;
         transform: none;
       }
@@ -311,16 +312,21 @@
     }
 
     .music-support img {
-      aspect-ratio: 1 / 1.1;
+      aspect-ratio: 16 / 10;
       object-fit: cover;
     }
 
     .music-live img {
-      object-position: 50% 72%;
+      object-position: 50% 62%;
+    }
+
+    .music-guitar img {
+      object-position: 50% 46%;
     }
 
     .music-sax img {
-      object-position: 50% 18%;
+      aspect-ratio: 16 / 11;
+      object-position: 50% 22%;
     }
 
     .music-collage figcaption {
@@ -376,6 +382,10 @@
         text-align: center;
       }
 
+      .about-portrait {
+        justify-content: center;
+      }
+
       .about-hero .heading,
       .about-hero .subtext {
         margin-left: auto;
@@ -409,6 +419,16 @@
       .music-support {
         grid-template-columns: 1fr;
       }
+
+      .music-primary img,
+      .music-support img,
+      .music-sax img {
+        aspect-ratio: 4 / 3;
+      }
+
+      .music-guitar img {
+        object-position: 50% 45%;
+      }
     }
   </style>
 </head>
@@ -439,7 +459,7 @@
             workflows break, and how they can be improved.</p>
         </div>
         <div class="about-portrait reveal">
-          <img src="images/about_portrait.png" alt="Dylan Afriyie in formal professional attire">
+          <img src="images/aabout_portrait.png" alt="Dylan Afriyie in formal business attire">
         </div>
       </div>
     </div>
@@ -656,17 +676,21 @@
         </div>
         <div class="music-collage">
           <figure class="music-primary reveal">
-            <img loading="lazy" src="images/music_mass_keyboard.jpg" alt="Dylan Afriyie playing keyboard during Catholic Mass">
-            <figcaption>Catholic Mass · Keyboard</figcaption>
+            <img loading="lazy" src="images/music_mass_keyboard.jpg" alt="Dylan Afriyie playing keyboard during a liturgical performance">
+            <figcaption>Keyboard · Liturgical Performance</figcaption>
           </figure>
           <div class="music-support">
             <figure class="music-live reveal">
-              <img loading="lazy" src="images/music_live_keyboard.jpg" alt="Dylan Afriyie performing on keyboard">
-              <figcaption>Live performance · Keyboard</figcaption>
+              <img loading="lazy" src="images/music_live_keyboard.jpg" alt="Dylan Afriyie performing on keyboard at a live event">
+              <figcaption>Keyboard · Live Performance</figcaption>
+            </figure>
+            <figure class="music-guitar reveal">
+              <img loading="lazy" src="images/music_guitar.png" alt="Dylan Afriyie performing on electric guitar">
+              <figcaption>Guitar · Live Performance</figcaption>
             </figure>
             <figure class="music-sax reveal">
               <img loading="lazy" src="images/music_saxophone.png" alt="Dylan Afriyie playing saxophone">
-              <figcaption>Saxophone</figcaption>
+              <figcaption>Saxophone · Instrumental Practice</figcaption>
             </figure>
           </div>
         </div>
