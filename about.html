@@ -284,25 +284,13 @@
 
     .music-collage {
       display: grid;
-      grid-template-columns: 1.25fr 0.9fr;
+      grid-template-columns: 1.45fr 1fr;
       gap: 0.7rem;
+      align-items: start;
     }
 
     .music-collage figure {
       margin: 0;
-    }
-
-    .music-collage img {
-      width: 100%;
-      display: block;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-    }
-
-    .music-primary img {
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      object-position: 35% 70%;
     }
 
     .music-support {
@@ -311,22 +299,14 @@
       gap: 0.7rem;
     }
 
-    .music-support img {
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-    }
-
-    .music-live img {
-      object-position: 50% 62%;
-    }
-
-    .music-guitar img {
-      object-position: 50% 46%;
-    }
-
-    .music-sax img {
-      aspect-ratio: 16 / 11;
-      object-position: 50% 22%;
+    .music-collage img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: #08101c;
     }
 
     .music-collage figcaption {
@@ -370,11 +350,22 @@
       border-radius: 2px;
     }
 
-    @media (max-width: 900px) {
-      .about-intro,
-      .edu-layout,
+    @media (max-width: 1000px) {
       .music-layout,
       .music-collage {
+        grid-template-columns: 1fr;
+      }
+
+      .music-support {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .about-intro,
+      .edu-layout {
         grid-template-columns: 1fr;
       }
 
@@ -395,11 +386,6 @@
       .edu-photo {
         max-width: 380px;
       }
-
-      .music-support {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
     }
 
     @media (max-width: 768px) {
@@ -415,19 +401,11 @@
       .tl-line {
         display: none;
       }
+    }
 
+    @media (max-width: 600px) {
       .music-support {
         grid-template-columns: 1fr;
-      }
-
-      .music-primary img,
-      .music-support img,
-      .music-sax img {
-        aspect-ratio: 4 / 3;
-      }
-
-      .music-guitar img {
-        object-position: 50% 45%;
       }
     }
   </style>
