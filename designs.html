@@ -134,55 +134,147 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════════════════
-       DESIGNS PAGE STYLES (existing)
+       DESIGNS PAGE
        ═══════════════════════════════════════════════════════════════════════════ */
 
     .designs-hero {
-      padding: 8rem 0 3rem;
+      padding: 8rem 0 2.2rem;
     }
 
-    .design-grid {
+    .designs-hero .subtext {
+      max-width: 620px;
+      margin-bottom: 1.6rem;
+    }
+
+    .design-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem 1.2rem;
+    }
+
+    .design-filter {
+      appearance: none;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .design-filter:hover,
+    .design-filter:focus-visible,
+    .design-filter.is-active {
+      color: var(--accent);
+    }
+
+    .design-filter.is-active {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-thickness: 1px;
+    }
+
+    .design-filter:focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    .design-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .design-featured,
+    .design-selected,
+    .design-supporting,
+    .design-additional {
+      display: grid;
+      gap: 1.1rem;
+      align-items: start;
+    }
+
+    .design-band {
+      margin: 0;
+    }
+
+    .design-band-selected {
+      margin-top: 1.5rem;
+    }
+
+    .design-featured {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .design-selected,
+    .design-supporting {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .design-supporting {
+      margin-top: 0;
+    }
+
+    .design-additional {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 820px;
+      margin-top: 0.2rem;
+    }
+
+    .design-stage.is-filtered {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      gap: 1.1rem;
+    }
+
+    .design-stage.is-filtered .design-band {
+      display: none;
+    }
+
+    .design-stage.is-filtered .design-featured,
+    .design-stage.is-filtered .design-selected,
+    .design-stage.is-filtered .design-supporting,
+    .design-stage.is-filtered .design-additional {
+      display: contents;
     }
 
     .design-card {
+      display: block;
+      width: 100%;
+      text-align: left;
+      font: inherit;
+      color: inherit;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
-      transition: var(--transition);
+      transition: border-color 0.35s ease, transform 0.35s ease;
       cursor: pointer;
       position: relative;
+      padding: 0;
     }
 
-    .design-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0;
-      transition: var(--transition);
-      z-index: 2;
+    .design-card.is-hidden {
+      display: none;
     }
 
-    .design-card:hover {
+    .design-card:hover,
+    .design-card:focus-visible {
       border-color: var(--border-hover);
-      transform: translateY(-4px);
     }
 
-    .design-card:hover::before {
-      opacity: 1;
+    .design-card:focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 3px;
     }
 
-    /* ═══ SKELETON LOADING ═══ */
     .img-wrapper {
       position: relative;
-      aspect-ratio: 4/3;
       background: var(--bg-raised);
       overflow: hidden;
     }
@@ -202,45 +294,121 @@
     }
 
     @keyframes shimmer {
-      0% {
-        transform: translateX(-100%);
-      }
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
 
-      100% {
-        transform: translateX(100%);
-      }
+    .design-card[data-fit="contain"] .img-wrapper {
+      aspect-ratio: 1 / 1;
+    }
+
+    .design-card[data-orient="square"] .img-wrapper {
+      aspect-ratio: 1 / 1;
+    }
+
+    .design-card[data-orient="portrait"] .img-wrapper {
+      aspect-ratio: 3 / 4;
+    }
+
+    .design-card[data-orient="landscape"] .img-wrapper {
+      aspect-ratio: 3 / 2;
+    }
+
+    .design-card[data-surface="dark"] .img-wrapper {
+      background: #08101c;
+    }
+
+    .design-card[data-surface="light"] .img-wrapper {
+      background: #f4f4f4;
     }
 
     .design-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
-      background: var(--bg-raised);
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.4s ease, transform 0.45s ease;
+    }
+
+    .design-card[data-fit="contain"] img {
+      object-fit: contain;
+      padding: 1.4rem;
     }
 
     .design-card img.visible {
       opacity: 1;
     }
 
+    .design-card:hover img.visible,
+    .design-card:focus-visible img.visible {
+      transform: scale(1.03);
+    }
+
+    .design-card[data-fit="contain"]:hover img.visible,
+    .design-card[data-fit="contain"]:focus-visible img.visible {
+      transform: scale(1.02);
+    }
+
     .design-caption {
-      padding: 0.8rem 1rem;
+      padding: 0.85rem 1rem 1rem;
     }
 
     .design-caption .design-title {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--text);
     }
 
     .design-caption .design-subtitle {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
+      margin-top: 0.12rem;
     }
 
-    /* Modal */
+    .design-additional .design-caption {
+      padding: 0.7rem 0.9rem 0.85rem;
+    }
+
+    .design-additional .design-title {
+      font-size: 0.84rem;
+    }
+
+    .designs-bridge .subtext {
+      margin-bottom: 1rem;
+    }
+
+    .designs-bridge-link {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .designs-bridge-link .arrow {
+      display: inline-block;
+      color: var(--accent);
+      margin-left: 0.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .designs-bridge-link:hover,
+    .designs-bridge-link:focus-visible {
+      color: var(--text);
+    }
+
+    .designs-bridge-link:hover .arrow,
+    .designs-bridge-link:focus-visible .arrow {
+      transform: translateX(3px);
+    }
+
+    .designs-bridge-link:focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
     .img-modal {
       display: none;
       position: fixed;
@@ -250,7 +418,7 @@
       backdrop-filter: blur(8px);
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 4.5rem 3.5rem 3.2rem;
     }
 
     .img-modal.active {
@@ -258,37 +426,103 @@
     }
 
     .img-modal img {
-      max-width: 900px;
-      width: 95%;
-      border-radius: var(--radius);
+      max-width: min(92vw, calc(100vw - 7rem));
+      max-height: min(88vh, calc(100vh - 8rem));
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 0;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 
-    .img-modal-close {
+    .img-modal-close,
+    .img-modal-nav {
       position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
       background: rgba(255, 255, 255, 0.1);
       border: none;
       color: white;
       width: 40px;
       height: 40px;
       border-radius: 10px;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       cursor: pointer;
+    }
+
+    .img-modal-close {
+      top: 1.5rem;
+      right: 1.5rem;
       z-index: 5001;
     }
 
+    .img-modal-nav.prev {
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .img-modal-nav.next {
+      right: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .img-modal-close:hover,
+    .img-modal-nav:hover,
+    .img-modal-close:focus-visible,
+    .img-modal-nav:focus-visible {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .img-modal-close:focus-visible,
+    .img-modal-nav:focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .img-modal-count {
+      position: fixed;
+      bottom: 1.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
     @media (max-width: 900px) {
-      .design-grid {
+      .design-featured,
+      .design-selected,
+      .design-supporting,
+      .design-additional,
+      .design-stage.is-filtered {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .design-additional {
+        max-width: none;
       }
     }
 
     @media (max-width: 560px) {
-      .design-grid {
+      .design-featured,
+      .design-selected,
+      .design-supporting,
+      .design-additional,
+      .design-stage.is-filtered {
         grid-template-columns: 1fr;
       }
+
+      .design-card[data-fit="contain"] img {
+        padding: 1.8rem 2.2rem;
+      }
+
+      .img-modal {
+        padding: 4.5rem 1rem 3.5rem;
+      }
+
+      .img-modal-nav.prev { left: 0.6rem; }
+      .img-modal-nav.next { right: 0.6rem; }
     }
   </style>
 </head>
@@ -335,161 +569,240 @@
 
     <section class="designs-hero">
       <div class="container">
-        <span class="label reveal">// design work</span>
-        <h2 class="heading reveal">Graphic Design <em>Portfolio</em></h2>
-        <p class="subtext reveal">Professional design work spanning corporate branding, legal documentation, packaging,
-          and visual communications — built over a decade of client-facing work for government and private-sector
-          organisations.</p>
+        <span class="label reveal">// visual work</span>
+        <h2 class="heading reveal">Design systems, visual communication &amp; <em>creative work</em>.</h2>
+        <p class="subtext reveal">A curated selection of brand, campaign and communication work spanning identity, art direction and editorial design.</p>
+        <nav class="design-filters reveal" aria-label="Design categories">
+          <button type="button" class="design-filter is-active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="design-filter" data-filter="brand" aria-pressed="false">Brand &amp; Identity</button>
+          <button type="button" class="design-filter" data-filter="campaign" aria-pressed="false">Campaigns</button>
+          <button type="button" class="design-filter" data-filter="corporate" aria-pressed="false">Corporate</button>
+          <button type="button" class="design-filter" data-filter="editorial" aria-pressed="false">Editorial</button>
+        </nav>
       </div>
     </section>
 
     <section class="section-pad" style="padding-top:0;">
       <div class="container">
-        <div class="design-grid">
+        <div class="design-stage" id="designStage">
 
-          <div class="design-card reveal" onclick="openImg('images/design_1.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_1.jpg"
-                alt="Corporate Brand Identity" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Corporate Brand Identity</div>
-              <div class="design-subtitle">Client: De-Bamfo Quality Enterprise</div>
-            </div>
+          <p class="design-band reveal"><span class="label">// featured work</span></p>
+          <div class="design-featured">
+            <button type="button" class="design-card reveal" data-cat="campaign" data-gallery="cora" data-index="0" data-orient="portrait" data-surface="light">
+              <div class="img-wrapper">
+                <img decoding="async" src="images/design_21.png" alt="CORA botanical body butter campaign artwork" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">CORA</div>
+                <div class="design-subtitle">Brand Campaign &amp; Product Art Direction</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="campaign" data-gallery="venus-campaign" data-index="0" data-orient="portrait" data-surface="dark">
+              <div class="img-wrapper">
+                <img decoding="async" src="images/design_29.png" alt="Venus Properties Consult luxury property campaign" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Venus Properties Consult</div>
+                <div class="design-subtitle">Luxury Property Campaign &amp; Art Direction</div>
+              </div>
+            </button>
           </div>
 
-          <div class="design-card reveal" onclick="openImg('images/design_2.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_2.jpg"
-                alt="Business Flyer Design" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Business Flyer Design</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
+          <p class="design-band design-band-selected reveal"><span class="label">// selected work</span></p>
+          <div class="design-selected">
+            <button type="button" class="design-card reveal" data-cat="corporate" data-gallery="digital-point-corporate" data-index="0" data-orient="portrait" data-surface="dark">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_24.png" alt="Digital Point Good Friday corporate campaign" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Digital Point</div>
+                <div class="design-subtitle">Corporate &amp; Social Communication</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="corporate" data-gallery="digital-point-corporate" data-index="1" data-orient="portrait" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_20.png" alt="Digital Point Resurrection Sunday corporate campaign" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Digital Point</div>
+                <div class="design-subtitle">Corporate &amp; Social Communication</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="corporate" data-gallery="digital-point-corporate" data-index="2" data-orient="portrait" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_17.png" alt="Digital Point birthday leadership artwork" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Digital Point</div>
+                <div class="design-subtitle">Corporate &amp; Social Communication</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="brand" data-gallery="digital-point" data-index="0" data-fit="contain" data-surface="dark">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_3.jpg" alt="Digital Point logo on a dark background" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Digital Point</div>
+                <div class="design-subtitle">Brand &amp; Identity</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="brand" data-gallery="facts-drop" data-index="0" data-fit="contain" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_7.jpg" alt="Facts Drop logo with microphone monogram" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Facts Drop</div>
+                <div class="design-subtitle">Media Brand Communication</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="brand" data-gallery="venus" data-index="0" data-orient="landscape" data-fit="contain" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_11.jpg" alt="Venus Properties Consult wordmark with gold accent" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Venus Properties Consult</div>
+                <div class="design-subtitle">Brand &amp; Identity</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="concept" data-gallery="apple-watch" data-index="0" data-orient="landscape" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_22.png" alt="Speculative Apple Watch outdoor advertising concept" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Apple Watch Advertising Concept</div>
+                <div class="design-subtitle">Speculative Product Advertising</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="campaign" data-gallery="facts-drop-impact" data-index="0" data-orient="portrait" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_10.jpg" alt="Facts Drop campaign poster featuring Colonel Duke Hanyabui" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Facts Drop</div>
+                <div class="design-subtitle">Media Brand Communication</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="campaign" data-gallery="mercy" data-index="0" data-orient="portrait" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_9.jpg" alt="Mercy's Catering campaign banner with plated dishes" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Mercy&rsquo;s Catering</div>
+                <div class="design-subtitle">Promotional &amp; Commercial Design</div>
+              </div>
+            </button>
           </div>
 
-          <div class="design-card reveal" onclick="openImg('images/design_3.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_3.jpg"
-                alt="Corporate Brand Identity" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Corporate Brand Identity</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
+          <div class="design-supporting">
+            <button type="button" class="design-card reveal" data-cat="brand" data-gallery="debamfo" data-index="0" data-fit="contain" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_1.jpg" alt="De-Bamfo Quality Enterprise logo with gear and wrench mark" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">De-Bamfo Quality Enterprise</div>
+                <div class="design-subtitle">Brand &amp; Identity</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="campaign" data-gallery="sparknest" data-index="0" data-orient="portrait" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_2.jpg" alt="SparkNest Services professional cleaning campaign" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">SparkNest Services</div>
+                <div class="design-subtitle">Promotional &amp; Commercial Design</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="campaign" data-gallery="gameday" data-index="0" data-orient="portrait" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_14.jpg" alt="Facts Drop Game Day basketball campaign poster" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Facts Drop</div>
+                <div class="design-subtitle">Media Brand Communication</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="corporate" data-gallery="digital-point-independence" data-index="0" data-orient="square" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_5.png" alt="Digital Point Independence Day corporate campaign" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Digital Point</div>
+                <div class="design-subtitle">Corporate &amp; Social Communication</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="corporate" data-gallery="youth-month" data-index="0" data-orient="landscape" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_13.jpg" alt="Facts Drop Youth Month communication featuring Dylan Afriyie" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Facts Drop</div>
+                <div class="design-subtitle">Corporate &amp; Social Communication</div>
+              </div>
+            </button>
+
+            <button type="button" class="design-card reveal" data-cat="brand" data-gallery="mark-g" data-index="0" data-fit="contain" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_15.jpg" alt="Green letter G identity mark styled as a vehicle" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Identity Mark</div>
+                <div class="design-subtitle">Brand &amp; Identity</div>
+              </div>
+            </button>
           </div>
 
-          <div class="design-card reveal" onclick="openImg('images/design_4.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_4.jpg"
-                alt="Corporate Brand Identity" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Corporate Brand Identity</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
+          <div class="design-additional">
+            <button type="button" class="design-card reveal" data-cat="editorial" data-gallery="funeral" data-index="0" data-orient="landscape" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_27.png" alt="Funeral arrangements editorial design" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Funeral Arrangements</div>
+                <div class="design-subtitle">Editorial &amp; Commemorative Design</div>
+              </div>
+            </button>
 
-          <div class="design-card reveal" onclick="openImg('images/design_5.png')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_5.png"
-                alt="Visual Communications" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Visual Communications</div>
-              <div class="design-subtitle">Corporate</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_6.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_6.jpg" alt="Logo Design"
-                onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Logo Design</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_7.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_7.jpg" alt="Logo Design"
-                onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Logo Design</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_8.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_8.jpg"
-                alt="Business Flyer Design" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Business Flyer Design</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_9.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_9.jpg"
-                alt="Business Banner Design" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Business Banner Design</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_10.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_10.jpg"
-                alt="Visual Communications" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Visual Communications</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_11.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_11.jpg"
-                alt="Visual Communications" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Visual Communications</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_12.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_12.jpg"
-                alt="Visual Communications" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Visual Communications</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_13.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_13.jpg"
-                alt="Visual Communications" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Visual Communications</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_14.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_14.jpg"
-                alt="Visual Communications" onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Visual Communications</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
-          </div>
-
-          <div class="design-card reveal" onclick="openImg('images/design_15.jpg')">
-            <div class="img-wrapper"><img loading="lazy" decoding="async" src="images/design_15.jpg" alt="Logo Design"
-                onload="imgLoaded(this)"></div>
-            <div class="design-caption">
-              <div class="design-title">Logo Design</div>
-              <div class="design-subtitle">Professional</div>
-            </div>
+            <button type="button" class="design-card reveal" data-cat="editorial" data-gallery="anniversary" data-index="0" data-orient="portrait" data-surface="light">
+              <div class="img-wrapper">
+                <img loading="lazy" decoding="async" src="images/design_12.jpg" alt="Priestly anniversary commemorative design for Rev. Fr. Dylan Owusu Afriyie" onload="imgLoaded(this)">
+              </div>
+              <div class="design-caption">
+                <div class="design-title">Priestly Anniversary</div>
+                <div class="design-subtitle">Editorial &amp; Commemorative Design</div>
+              </div>
+            </button>
           </div>
 
         </div>
       </div>
     </section>
 
-    <!-- IMAGE MODAL -->
-    <div class="img-modal" id="imgModal">
-      <button class="img-modal-close" onclick="closeImg()">&times;</button>
-      <img id="imgModalSrc" src="" alt="Design">
+    <section class="section-pad designs-bridge" style="padding-top:0;">
+      <div class="container">
+        <p class="subtext reveal">Interested in the thinking behind the work?</p>
+        <a href="contact.html" class="designs-bridge-link reveal">Contact <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <div class="img-modal" id="imgModal" role="dialog" aria-modal="true" aria-label="Design viewer">
+      <button class="img-modal-close" id="imgModalClose" aria-label="Close design viewer">&times;</button>
+      <button class="img-modal-nav prev" id="imgModalPrev" aria-label="Previous design"><i class="fas fa-chevron-left"></i></button>
+      <img id="imgModalSrc" src="" alt="">
+      <button class="img-modal-nav next" id="imgModalNext" aria-label="Next design"><i class="fas fa-chevron-right"></i></button>
+      <div class="img-modal-count" id="imgModalCount"></div>
     </div>
 
     <footer>
@@ -581,15 +894,13 @@
     })();
 
     // ═══════════════════════════════════════════════════════════════════════════
-    // ORIGINAL DESIGNS PAGE SCRIPTS
+    // DESIGNS PAGE
     // ═══════════════════════════════════════════════════════════════════════════
 
-    // Nav scroll
     window.addEventListener('scroll', function () {
       document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Scroll reveal
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e, i) {
         if (e.isIntersecting) {
@@ -600,39 +911,176 @@
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
 
-    // ═══ IMAGE LOADED — fade in and kill skeleton ═══
     function imgLoaded(img) {
       img.classList.add('visible');
       var wrapper = img.closest('.img-wrapper');
       if (wrapper) wrapper.classList.add('loaded');
     }
 
-    // Handle images already cached by browser before JS runs
     document.querySelectorAll('.design-card img').forEach(function (img) {
       if (img.complete && img.naturalWidth > 0) {
         imgLoaded(img);
       }
     });
 
-    // ═══ MODAL ═══
-    function openImg(src) {
-      document.getElementById('imgModalSrc').src = src;
-      document.getElementById('imgModal').classList.add('active');
+    var GALLERIES = {
+      cora: [
+        { src: 'images/design_21.png', alt: 'CORA botanical body butter campaign artwork' },
+        { src: 'images/design_23.png', alt: 'CORA Reveal Your Truest Glow campaign artwork' },
+        { src: 'images/design_33.png', alt: 'CORA GLOW product campaign artwork' },
+        { src: 'images/design_16.png', alt: 'CORA Barrier Restoration Concentrate billboard' },
+        { src: 'images/design_18.png', alt: 'CORA Barrier Restoration outdoor billboard' }
+      ],
+      'venus-campaign': [
+        { src: 'images/design_29.png', alt: 'Venus Properties Consult luxury property campaign' },
+        { src: 'images/design_30.png', alt: 'Venus Properties Consult luxury residence campaign' },
+        { src: 'images/design_32.png', alt: 'Venus Properties Consult architectural campaign' },
+        { src: 'images/design_28.png', alt: 'Venus Properties Consult evening residence campaign' },
+        { src: 'images/design_31.png', alt: 'Venus Properties Consult Material Provenance artwork' }
+      ],
+      'digital-point-corporate': [
+        { src: 'images/design_24.png', alt: 'Digital Point Good Friday corporate campaign' },
+        { src: 'images/design_20.png', alt: 'Digital Point Resurrection Sunday corporate campaign' },
+        { src: 'images/design_17.png', alt: 'Digital Point birthday leadership artwork' },
+        { src: 'images/design_25.png', alt: 'Digital Point birthday leadership artwork, alternate composition' },
+        { src: 'images/design_26.png', alt: 'Digital Point birthday leadership artwork, variant layout' }
+      ],
+      'digital-point': [
+        { src: 'images/design_3.jpg', alt: 'Digital Point logo on a dark background' },
+        { src: 'images/design_4.jpg', alt: 'Digital Point logo on a light background' }
+      ],
+      'digital-point-independence': [
+        { src: 'images/design_5.png', alt: 'Digital Point Independence Day corporate campaign' }
+      ],
+      'facts-drop': [
+        { src: 'images/design_7.jpg', alt: 'Facts Drop logo with microphone monogram' },
+        { src: 'images/design_6.jpg', alt: 'Facts Drop logo with speech bubbles and microphone' }
+      ],
+      venus: [
+        { src: 'images/design_11.jpg', alt: 'Venus Properties Consult wordmark with gold accent' }
+      ],
+      'facts-drop-impact': [
+        { src: 'images/design_10.jpg', alt: 'Facts Drop campaign poster featuring Colonel Duke Hanyabui' }
+      ],
+      'apple-watch': [
+        { src: 'images/design_22.png', alt: 'Speculative Apple Watch outdoor advertising concept' },
+        { src: 'images/design_19.png', alt: 'Speculative Apple Watch billboard concept with three watches' }
+      ],
+      debamfo: [
+        { src: 'images/design_1.jpg', alt: 'De-Bamfo Quality Enterprise logo with gear and wrench mark' }
+      ],
+      mercy: [
+        { src: 'images/design_9.jpg', alt: 'Mercy\'s Catering campaign banner with plated dishes' },
+        { src: 'images/design_8.jpg', alt: 'Mercy\'s Catering promotional flyer with local dishes' }
+      ],
+      sparknest: [
+        { src: 'images/design_2.jpg', alt: 'SparkNest Services professional cleaning campaign' }
+      ],
+      gameday: [
+        { src: 'images/design_14.jpg', alt: 'Facts Drop Game Day basketball campaign poster' }
+      ],
+      'youth-month': [
+        { src: 'images/design_13.jpg', alt: 'Facts Drop Youth Month communication featuring Dylan Afriyie' }
+      ],
+      'mark-g': [
+        { src: 'images/design_15.jpg', alt: 'Green letter G identity mark styled as a vehicle' }
+      ],
+      funeral: [
+        { src: 'images/design_27.png', alt: 'Funeral arrangements editorial design' }
+      ],
+      anniversary: [
+        { src: 'images/design_12.jpg', alt: 'Priestly anniversary commemorative design for Rev. Fr. Dylan Owusu Afriyie' }
+      ]
+    };
+
+    var modal = document.getElementById('imgModal');
+    var modalImg = document.getElementById('imgModalSrc');
+    var modalCount = document.getElementById('imgModalCount');
+    var modalPrev = document.getElementById('imgModalPrev');
+    var modalNext = document.getElementById('imgModalNext');
+    var modalClose = document.getElementById('imgModalClose');
+    var currentGallery = [];
+    var currentIndex = 0;
+    var lastTrigger = null;
+
+    function showCurrent() {
+      var item = currentGallery[currentIndex];
+      if (!item) return;
+      modalImg.src = item.src;
+      modalImg.alt = item.alt;
+      modalCount.textContent = (currentIndex + 1) + ' / ' + currentGallery.length;
+      var many = currentGallery.length > 1;
+      modalPrev.hidden = !many;
+      modalNext.hidden = !many;
+    }
+
+    function openGallery(name, index, trigger) {
+      currentGallery = GALLERIES[name] || [];
+      if (!currentGallery.length) return;
+      currentIndex = Math.max(0, Math.min(index || 0, currentGallery.length - 1));
+      lastTrigger = trigger || null;
+      showCurrent();
+      modal.classList.add('active');
       document.body.style.overflow = 'hidden';
+      modalClose.focus();
     }
 
-    function closeImg() {
-      document.getElementById('imgModal').classList.remove('active');
-      document.body.style.overflow = 'auto';
-      document.getElementById('imgModalSrc').src = '';
+    function closeGallery() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      modalImg.src = '';
+      modalImg.alt = '';
+      if (lastTrigger) lastTrigger.focus();
     }
 
-    document.getElementById('imgModal').addEventListener('click', function (e) {
-      if (e.target === this) closeImg();
+    function stepGallery(dir) {
+      if (currentGallery.length < 2) return;
+      currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
+      showCurrent();
+    }
+
+    document.getElementById('designStage').addEventListener('click', function (e) {
+      var card = e.target.closest('.design-card');
+      if (!card || !this.contains(card)) return;
+      openGallery(card.getAttribute('data-gallery'), parseInt(card.getAttribute('data-index'), 10) || 0, card);
     });
 
+    modalClose.addEventListener('click', closeGallery);
+    modalPrev.addEventListener('click', function () { stepGallery(-1); });
+    modalNext.addEventListener('click', function () { stepGallery(1); });
+    modal.addEventListener('click', function (e) { if (e.target === this) closeGallery(); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeImg();
+      if (!modal.classList.contains('active')) return;
+      if (e.key === 'Escape') closeGallery();
+      if (e.key === 'ArrowLeft') stepGallery(-1);
+      if (e.key === 'ArrowRight') stepGallery(1);
+    });
+
+    var stage = document.getElementById('designStage');
+    var filterButtons = document.querySelectorAll('.design-filter');
+    var cards = document.querySelectorAll('.design-card');
+
+    function applyFilter(name) {
+      var filtered = name !== 'all';
+      stage.classList.toggle('is-filtered', filtered);
+      cards.forEach(function (card) {
+        var match = !filtered || card.getAttribute('data-cat') === name;
+        card.classList.toggle('is-hidden', !match);
+        if (match && !card.classList.contains('visible')) {
+          card.classList.add('visible');
+        }
+      });
+      filterButtons.forEach(function (btn) {
+        var active = btn.getAttribute('data-filter') === name;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    }
+
+    filterButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        applyFilter(btn.getAttribute('data-filter'));
+      });
     });
   </script>
 </body>
